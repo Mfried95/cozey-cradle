@@ -18,7 +18,7 @@ const connectDb = async () => {
 
 connectDb();
 
-app.get("/movies", async(req, res) => {
+app.get("/movies", async (req, res) => {
   try {
     const database = client.db("sample_mflix");
     const movies = database.collection("movies");
