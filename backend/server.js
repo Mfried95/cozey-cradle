@@ -13,3 +13,8 @@ mongoose.connect('mongodb+srv://cozeycradle:s2EpenbL4JpBBABN@cozeycradle.w07iyp9
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
+
+
+app.get("/", (req, res) => {
+  res.send("Hello, world!");
+});
