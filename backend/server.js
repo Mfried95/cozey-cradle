@@ -23,7 +23,7 @@ app.get("/movies", async(req, res) => {
     const database = client.db("sample_mflix");
     const movies = database.collection("movies");
     const allMovies = await movies.find().toArray();
-    res.json(allMovies);
+    res.json(allMovies[0]);
   } catch (error) {
     console.error("Failed to fetch movies from the database:", error);
     res.status(500).json({ error: "Failed to fetch movies from the database" });
