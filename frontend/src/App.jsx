@@ -7,18 +7,19 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:3000/movies')
       .then(response => response.json())
-      .then(data => setMovies(data))
+      .then(data => {
+        setMovies(data);
+      })
       .catch(error => console.error('Failed to fetch movies:', error));
   }, []);
 
   return (
     <div className="App">
-      {console.log(movies)}
       <h1>Movies</h1>
       <ul>
-        {movies.map(movie => (
-          <li key={movie._id}>{movie.title}</li>
-        ))}
+        <li>
+          {movies.title}
+        </li>
       </ul>
     </div>
   );

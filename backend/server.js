@@ -1,7 +1,10 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
+
 const port = 3000;
 
 const uri = "mongodb+srv://cozeycradle:s2EpenbL4JpBBABN@cozeycradle.w07iyp9.mongodb.net/";
