@@ -3,7 +3,7 @@ const { MongoClient } = require("mongodb");
 const uri = "mongodb+srv://cozeycradle:s2EpenbL4JpBBABN@cozeycradle.w07iyp9.mongodb.net/";
 const client = new MongoClient(uri);
 
-const connectDb = async () => {
+const connectDb = async() => {
   try {
     await client.connect();
     const database = client.db("sample_mflix"); // select what database to connect
