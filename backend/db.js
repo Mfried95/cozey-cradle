@@ -7,11 +7,10 @@ const connectDb = async() => {
   let connection;
   try {
     connection = await client.connect();
-    const database = connection.db("cozeycradle");
-    const products = database.collection("products");
+    const database = connection.db("cozeycradle"); // choose database
+    const products = database.collection("products"); // choose collection
     
-    console.log(database, products);
-    
+    console.log(products);
     // Perform operations on the products collection or interact with the database here
 
   } finally {
@@ -22,3 +21,4 @@ const connectDb = async() => {
 };
 
 connectDb().catch(console.dir);
+

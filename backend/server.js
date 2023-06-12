@@ -10,7 +10,7 @@ const port = 3000;
 const uri = "mongodb+srv://cozeycradle:s2EpenbL4JpBBABN@cozeycradle.w07iyp9.mongodb.net/";
 const client = new MongoClient(uri);
 
-const connectDb = async () => {
+const connectDb = async() => {
   try {
     await client.connect();
     console.log("Connected to the database");
@@ -19,14 +19,14 @@ const connectDb = async () => {
   }
 };
 
-connectDb();
+
 
 app.get("/api/products", async(req, res) => {
   try {
     const database = client.db("cozeycradle");
     const products = database.collection("products");
     const allProducts = await products.find().toArray();
-    res.json(allProducts[0]);
+    res.json(allProducts);
   } catch (error) {
     console.error("Failed to fetch movies from the database:", error);
     res.status(500).json({ error: "Failed to fetch movies from the database" });
@@ -36,4 +36,6 @@ app.get("/api/products", async(req, res) => {
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+  connectDb();
 });
+
