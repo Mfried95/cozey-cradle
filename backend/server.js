@@ -21,12 +21,12 @@ const connectDb = async () => {
 
 connectDb();
 
-app.get("/movies", async (req, res) => {
+app.get("/api/products", async(req, res) => {
   try {
-    const database = client.db("sample_mflix");
-    const movies = database.collection("movies");
-    const allMovies = await movies.find().toArray();
-    res.json(allMovies[0]);
+    const database = client.db("cozeycradle");
+    const products = database.collection("products");
+    const allProducts = await products.find().toArray();
+    res.json(allProducts[0]);
   } catch (error) {
     console.error("Failed to fetch movies from the database:", error);
     res.status(500).json({ error: "Failed to fetch movies from the database" });

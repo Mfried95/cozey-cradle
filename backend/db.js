@@ -4,15 +4,20 @@ const uri = "mongodb+srv://cozeycradle:s2EpenbL4JpBBABN@cozeycradle.w07iyp9.mong
 const client = new MongoClient(uri);
 
 const connectDb = async() => {
+  let connection;
   try {
-    await client.connect();
-    const database = client.db("sample_mflix"); // select what database to connect
-    const movies = database.collection("movies"); // collection to select
-    const query = { title: "Back to the Future" }; // search specific in collection
-    const movie = await movies.findOne(query); // run the query
-    console.log(movie); // console log the collection
+    connection = await client.connect();
+    const database = connection.db("cozeycradle");
+    const products = database.collection("products");
+    
+    console.log(database, products);
+    
+    // Perform operations on the products collection or interact with the database here
+
   } finally {
-    client.close();
+    if (connection) {
+      connection.close();
+    }
   }
 };
 
