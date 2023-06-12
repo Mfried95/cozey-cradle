@@ -62,8 +62,9 @@ function Cradles() {
   };
 
   return (
-    <div className="App">
+    <div>
       <h2>Our cradles</h2>
+      <div className="filter-cradles-bar">
       <TextField
         select
         sx={{width: '150px'}}
@@ -103,13 +104,14 @@ function Cradles() {
           </MenuItem>
         ))}
       </TextField>
-      <div>
+      </div>
+
+      <div className='filtered-cradles'>
         {filteredCradles.map(cradle => (
           <div key={cradle._id} className="product-card">
-            <h3>{cradle.brand}</h3>
             <img src={cradle.image} alt="" />
-            <p>{cradle.description}</p>
-            {/* Render other cradle details here */}
+            <h3>{cradle.brand}</h3>
+            <span> From ${cradle.price} / day</span>
           </div>
         ))}
       </div>
