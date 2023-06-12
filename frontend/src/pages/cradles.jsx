@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import "../styles/cradle.css"
 
 function Cradles() {
   const [cradles, setCradles] = useState([]);
@@ -16,7 +16,14 @@ function Cradles() {
   return (
     <div className="App">
       <h2>Our cradles</h2>
-      
+      <div>
+        {cradles.map(cradle => (
+          <div key={cradle._id} className="product-card">
+            <img src={cradle.image} alt="" />
+            <h3>{cradle.brand} :: {cradle.city}</h3>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
