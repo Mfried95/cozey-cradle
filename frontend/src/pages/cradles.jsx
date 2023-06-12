@@ -111,17 +111,19 @@ function Cradles() {
         ))}
       </TextField>
       </div>
-      
-      <div className='filtered-cradles'>
+
+    <div className='filtered-cradles'>
       {filteredCradles.map(cradle => (
   <div
     key={cradle._id}
     className="product-card"
-    onClick={() => handleProductClick(cradle._id)}
   >
-    <img src={cradle.image} alt="" />
+    <img src={cradle.image} alt=""  onClick={() => handleProductClick(cradle._id)} />
     <h3>{cradle.brand}</h3>
     <span> From ${cradle.price} / day</span>
+    <button onClick={() => {
+      console.log(`rent this product ${cradle.brand} ${cradle._id}`)
+    }}>Book now!</button>
   </div>
 ))}
       </div>
