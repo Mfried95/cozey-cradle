@@ -12,25 +12,15 @@ const SearchBar = () => {
   const [selectedBrand, setSelectedBrand] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/cities')
-      .then((response) => response.json())
-      .then((data) => setCities(data))
-      .catch((error) => console.error('Failed to fetch cities:', error));
-
-    fetch('http://localhost:3000/api/categories')
-      .then((response) => response.json())
-      .then((data) => setCategories(data))
-      .catch((error) => console.error('Failed to fetch categories:', error));
-
-    fetch('http://localhost:3000/api/rentDurations')
-      .then((response) => response.json())
-      .then((data) => setRentDurations(data))
-      .catch((error) => console.error('Failed to fetch rent durations:', error));
-
-    fetch('http://localhost:3000/api/brands')
-      .then((response) => response.json())
-      .then((data) => setBrands(data))
-      .catch((error) => console.error('Failed to fetch brands:', error));
+    fetch('http://localhost:3000/api/products')
+      .then(response => response.json())
+      .then(data => {
+        setCities(['All', ...new Set(data.map(product => product.city))]);
+        setCategories(['All', ...new Set(data.map(product => product.category))]);
+        setRentDurations(['All', ...new Set(data.map(product => product.rentDuration))]);
+        setBrands(['All', ...new Set(data.map(product => product.brand))]);
+      })
+      .catch(error => console.error('Failed to fetch products:', error));
   }, []);
 
   const handleCityChange = (event) => {
@@ -61,9 +51,7 @@ const SearchBar = () => {
         >
           <MenuItem value="">All</MenuItem>
           {cities.map((city) => (
-            <MenuItem key={city.id} value={city.id}>
-              {city.name}
-            </MenuItem>
+            <MenuItem value={city}>{city}</MenuItem>
           ))}
         </Select>
         <FormHelperText>Select a city</FormHelperText>
@@ -79,9 +67,7 @@ const SearchBar = () => {
         >
           <MenuItem value="">All</MenuItem>
           {categories.map((category) => (
-            <MenuItem key={category.id} value={category.id}>
-              {category.name}
-            </MenuItem>
+            <MenuItem value={category}>{category}</MenuItem>
           ))}
         </Select>
         <FormHelperText>Select a category</FormHelperText>
@@ -97,9 +83,7 @@ const SearchBar = () => {
         >
           <MenuItem value="">All</MenuItem>
           {rentDurations.map((duration) => (
-            <MenuItem key={duration.id} value={duration.id}>
-              {duration.name}
-            </MenuItem>
+            <MenuItem value={duration}>{duration}</MenuItem>
           ))}
         </Select>
         <FormHelperText>Select a rent duration</FormHelperText>
@@ -115,9 +99,7 @@ const SearchBar = () => {
         >
           <MenuItem value="">All</MenuItem>
           {brands.map((brand) => (
-            <MenuItem key={brand.id} value={brand.id}>
-              {brand.name}
-            </MenuItem>
+            <MenuItem value={brand}>{brand}</MenuItem>
           ))}
         </Select>
         <FormHelperText>Select a brand</FormHelperText>
@@ -127,4 +109,3 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
-
