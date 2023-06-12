@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from './components/navbar'
 import Home from "./pages/Home";
-import Cradles from "./pages/Cradles"
+import Cradles from "./pages/cradles";
 import Works from "./pages/works";
 
 const App = () => {

@@ -1,9 +1,18 @@
-
+import React from 'react';
+import SearchBar from '../components/searchbar';
 
 const Home = () => {
   return (
-    <div>home</div>
-  )
-}
+    <div>
+      <section>
+        <h1>Search for a cradle</h1>
+        <SearchBar />
+      </section>
+      <section>
+        <h1>How It Works</h1>
+      </section>
+    </div>
+  );
+};
 
-export default Home
+export default Home;
