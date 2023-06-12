@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TextField, MenuItem } from '@mui/material';
-import '../styles/cradle.css'
+import '../styles/cradle.css';
 
 function Cradles() {
   const [cradles, setCradles] = useState([]);
@@ -66,7 +66,7 @@ function Cradles() {
       <h2>Our cradles</h2>
       <TextField
         select
-        sx={{width: '150px'}}
+        sx={{ width: '150px' }}
         label="Brand"
         value={searchBrand}
         onChange={handleSearchBrandChange}
@@ -78,7 +78,7 @@ function Cradles() {
         ))}
       </TextField>
       <TextField
-        sx={{width: '150px'}}
+        sx={{ width: '150px' }}
         select
         label="Search by city"
         value={searchCity}
@@ -92,7 +92,7 @@ function Cradles() {
       </TextField>
       <TextField
         select
-        sx={{width: '150px'}}
+        sx={{ width: '150px' }}
         label="Category"
         value={searchCategory}
         onChange={handleSearchCategoryChange}
