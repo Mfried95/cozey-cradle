@@ -61,6 +61,12 @@ function Cradles() {
     setSearchCategory(event.target.value);
   };
 
+  const handleProductClick = (productId) => {
+    // Navigate to the product page using the product ID
+    window.location.href = `/product/${productId}`;
+  };
+
+
   return (
     <div>
       <h2>Our cradles</h2>
@@ -105,15 +111,19 @@ function Cradles() {
         ))}
       </TextField>
       </div>
-
+      
       <div className='filtered-cradles'>
-        {filteredCradles.map(cradle => (
-          <div key={cradle._id} className="product-card">
-            <img src={cradle.image} alt="" />
-            <h3>{cradle.brand}</h3>
-            <span> From ${cradle.price} / day</span>
-          </div>
-        ))}
+      {filteredCradles.map(cradle => (
+  <div
+    key={cradle._id}
+    className="product-card"
+    onClick={() => handleProductClick(cradle._id)}
+  >
+    <img src={cradle.image} alt="" />
+    <h3>{cradle.brand}</h3>
+    <span> From ${cradle.price} / day</span>
+  </div>
+))}
       </div>
     </div>
   );

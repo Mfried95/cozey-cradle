@@ -3,6 +3,7 @@ import Navbar from './components/navbar'
 import Home from "./pages/Home";
 import Cradles from "./pages/Cradles"
 import Works from "./pages/works";
+import ProductPage from "./pages/ProductPage";
 
 const App = () => {
   return (
@@ -10,11 +11,12 @@ const App = () => {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="Cradles" element={<Cradles />} />
-        <Route path="Works" element={<Works />} />
+        <Route path="cradles" element={<Cradles />} />
+        <Route path="works" element={<Works />} />
+        <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
       </Routes>
     </div>
   )
 }
 
-export default App
+export default App;
