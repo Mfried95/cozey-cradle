@@ -1,8 +1,43 @@
+.filter-cradles-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filtered-cradles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .product-card {
+  display: inline-block;
   width: 300px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 10px;
+  text-align: center;
+  background-color: #ffffff;
+  cursor: pointer;
 }
 
 .product-card img {
   width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 12px;
 }
 
+.product-card h3 {
+  margin-top: 0;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.product-card span {
+  font-size: 14px;
+  color: #777777;
+}

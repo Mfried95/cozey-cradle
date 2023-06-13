@@ -63,6 +63,11 @@ function Cradles() {
     setSearchCategory(event.target.value);
   };
 
+  const handleProductClick = (productId) => {
+    // Navigate to the product page using the product ID
+    window.location.href = `/product/${productId}`;
+  };
+
   useEffect(() => {
     if (location.state) {
       const { selectedCity, selectedCategory, selectedRentDuration, selectedBrand } = location.state
@@ -72,9 +77,11 @@ function Cradles() {
     }
   },[location.state])
 
+
   return (
-    <div className="App">
+    <div>
       <h2>Our cradles</h2>
+      <div className="filter-cradles-bar">
       <TextField
         select
         sx={{width: '150px'}}
@@ -114,15 +121,22 @@ function Cradles() {
           </MenuItem>
         ))}
       </TextField>
-      <div>
-        {filteredCradles.map(cradle => (
-          <div key={cradle._id} className="product-card">
-            <h3>{cradle.brand}</h3>
-            <img src={cradle.image} alt="" />
-            <p>{cradle.description}</p>
-            {/* Render other cradle details here */}
-          </div>
-        ))}
+      </div>
+
+    <div className='filtered-cradles'>
+      {filteredCradles.map(cradle => (
+  <div
+    key={cradle._id}
+    className="product-card"
+  >
+    <img src={cradle.image} alt=""  onClick={() => handleProductClick(cradle._id)} />
+    <h3>{cradle.brand}</h3>
+    <span> From ${cradle.price} / day</span>
+    <button onClick={() => {
+      console.log(`rent this product ${cradle.brand} ${cradle._id}`)
+    }}>Book now!</button>
+  </div>
+))}
       </div>
     </div>
   );
