@@ -1,12 +1,27 @@
-.nav-container{
+.nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0em 3em;
+  background-color: rgb(186, 148, 222);
+  color: white;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  height: 4em;
 }
 
-.nav-links{
+.nav-links {
   display: flex;
   gap: 2em;
+}
+
+.nav-links a {
   text-decoration: none;
+  color: white;
+}
+
+
+.nav-links a:hover {
+  color: black;
 }
