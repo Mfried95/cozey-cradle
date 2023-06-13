@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { TextField, MenuItem } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 import '../styles/cradle.css'
 
 function Cradles() {
+  const location = useLocation();
   const [cradles, setCradles] = useState([]);
   const [filteredCradles, setFilteredCradles] = useState([]);
   const [searchBrand, setSearchBrand] = useState('');
@@ -60,6 +62,15 @@ function Cradles() {
   const handleSearchCategoryChange = (event) => {
     setSearchCategory(event.target.value);
   };
+
+  useEffect(() => {
+    if (location.state) {
+      const { selectedCity, selectedCategory, selectedRentDuration, selectedBrand } = location.state
+      setSearchBrand(selectedBrand)
+      setSearchCity(selectedCity)
+      setSearchCategory(selectedCategory)
+    }
+  },[location.state])
 
   return (
     <div className="App">

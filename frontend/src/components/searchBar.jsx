@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, FormHelperText, Select, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
+
+  const navigate = useNavigate();
   const [cities, setCities] = useState([]);
   const [categories, setCategories] = useState([]);
   const [rentDurations, setRentDurations] = useState([]);
@@ -16,10 +19,10 @@ const SearchBar = () => {
     fetch('http://localhost:3000/api/products')
       .then(response => response.json())
       .then(data => {
-        setCities(['All', ...new Set(data.map(product => product.city))]);
-        setCategories(['All', ...new Set(data.map(product => product.category))]);
-        setRentDurations(['All', ...new Set(data.map(product => product.rentDuration))]);
-        setBrands(['All', ...new Set(data.map(product => product.brand))]);
+        setCities([...new Set(data.map(product => product.city))]);
+        setCategories([...new Set(data.map(product => product.category))]);
+        setRentDurations([...new Set(data.map(product => product.rentDuration))]);
+        setBrands([...new Set(data.map(product => product.brand))]);
       })
       .catch(error => console.error('Failed to fetch products:', error));
   }, []);
@@ -59,21 +62,24 @@ const SearchBar = () => {
     setSelectedRentDuration('');
     setSelectedBrand('');
     setShowSubmitButton(false);
+
+    // Navigate to the "Cradles" page
+    navigate('/Cradles', { state: { selectedCity, selectedCategory, selectedRentDuration, selectedBrand } });
   };
 
   return (
     <div>
       <FormControl>
         <InputLabel id="city-label">City</InputLabel>
-        <Select
+        <Select 
           labelId="city-label"
           id="city-select"
           value={selectedCity}
           onChange={handleCityChange}
         >
           <MenuItem value="">All</MenuItem>
-          {cities.map((city) => (
-            <MenuItem key={city} value={city}>
+          {cities.map((city, index) => (
+            <MenuItem key={city+index} value={city}>
               {city}
             </MenuItem>
           ))}
@@ -90,8 +96,8 @@ const SearchBar = () => {
           onChange={handleCategoryChange}
         >
           <MenuItem value="">All</MenuItem>
-          {categories.map((category) => (
-            <MenuItem key={category} value={category}>
+          {categories.map((category, index) => (
+            <MenuItem key={category+index} value={category}>
               {category}
             </MenuItem>
           ))}
@@ -108,8 +114,8 @@ const SearchBar = () => {
           onChange={handleRentDurationChange}
         >
           <MenuItem value="">All</MenuItem>
-          {rentDurations.map((duration) => (
-            <MenuItem key={duration} value={duration}>
+          {rentDurations.map((duration, index) => (
+            <MenuItem key={duration+index} value={duration}>
               {duration}
             </MenuItem>
           ))}
@@ -126,8 +132,8 @@ const SearchBar = () => {
           onChange={handleBrandChange}
         >
           <MenuItem value="">All</MenuItem>
-          {brands.map((brand) => (
-            <MenuItem key={brand} value={brand}>
+          {brands.map((brand, index) => (
+            <MenuItem key={brand+index} value={brand}>
               {brand}
             </MenuItem>
           ))}
