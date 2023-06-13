@@ -24,4 +24,5 @@
 
 .nav-links a:hover {
   color: black;
+  border-top: black solid 1px;
 }
