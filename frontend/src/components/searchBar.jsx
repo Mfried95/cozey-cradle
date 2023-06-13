@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, FormHelperText, Select, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import "../styles/searchbar.css"
 
 const SearchBar = () => {
 
@@ -68,7 +69,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
+    <div className='search-container'>
       <FormControl>
         <InputLabel id="city-label">City</InputLabel>
         <Select 

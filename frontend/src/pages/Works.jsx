@@ -14,7 +14,7 @@ const Works = () => {
       <div className="step-container">
         <div>
           <div className="step">
-            <img src="../public/icon-blue-1.png" alt="How it Works - step 1" />
+            <img src="/icon-blue-1.png" alt="How it Works - step 1" />
             <h4>Choose the dates</h4>
           </div>
           <p>Select the dates and city for you to get started.</p>
@@ -22,7 +22,7 @@ const Works = () => {
 
         <div>
           <div className="step">
-            <img src="../public/icon-blue-2.png" alt="How it Works - step 2" />
+            <img src="/icon-blue-2.png" alt="How it Works - step 2" />
             <h4>Choose the product</h4>
           </div>
           <p> Choose a car seat from our wide range of products available. All the available products for your desired time slots shown on screen</p>
@@ -30,7 +30,7 @@ const Works = () => {
 
         <div>
           <div className="step">
-            <img src="../public/icon-blue-3.png" alt="How it Works - step 3" />
+            <img src="/icon-blue-3.png" alt="How it Works - step 3" />
             <h4>Book your product</h4>
           </div>
           <p> Once decided, you can book your product from our application within minutes.</p>
