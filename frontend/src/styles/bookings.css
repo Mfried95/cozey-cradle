@@ -1,0 +1,73 @@
+/* bookings.css */
+
+.bookings-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  color: rgb(186, 148, 222);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+
+}
+
+table th,
+table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+table td img {
+  max-width: 100px;
+}
+
+tfoot {
+  font-weight: bold;
+}
+
+.total-cost-row td {
+  border-top: 2px solid #333;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.checkout-button {
+  background-color: rgb(186, 148, 222);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.cradles-button {
+  color: rgb(186, 148, 222);
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid rgb(186, 148, 222);
+  cursor: pointer;
+}

@@ -1,7 +1,8 @@
 import "../styles/navbar.css";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { myBookings } = props;
   return (
     <div className="nav-container">
       <h2>Cozey Cradle</h2>
@@ -9,6 +10,9 @@ const Navbar = () => {
         <Link to="/">Home</Link>
         <Link to="/Cradles">Cradles</Link>
         <Link to="/Works">How it works</Link>
+        <Link to="/bookings"> My Bookings
+          {myBookings.length > 0 && myBookings.length}
+        </Link>
       </div>
     </div>
   );
