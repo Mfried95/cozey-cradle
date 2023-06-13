@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FormControl, InputLabel, MenuItem, FormHelperText, Select } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, FormHelperText, Select, Button } from '@mui/material';
 
 const SearchBar = () => {
   const [cities, setCities] = useState([]);
@@ -10,6 +10,7 @@ const SearchBar = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedRentDuration, setSelectedRentDuration] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
+  const [showSubmitButton, setShowSubmitButton] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:3000/api/products')
@@ -25,18 +26,39 @@ const SearchBar = () => {
 
   const handleCityChange = (event) => {
     setSelectedCity(event.target.value);
+    setShowSubmitButton(true);
   };
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
+    setShowSubmitButton(true);
   };
 
   const handleRentDurationChange = (event) => {
     setSelectedRentDuration(event.target.value);
+    setShowSubmitButton(true);
   };
 
   const handleBrandChange = (event) => {
     setSelectedBrand(event.target.value);
+    setShowSubmitButton(true);
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    // Do something with the selected options
+    console.log('Selected City:', selectedCity);
+    console.log('Selected Category:', selectedCategory);
+    console.log('Selected Rent Duration:', selectedRentDuration);
+    console.log('Selected Brand:', selectedBrand);
+
+    // Reset the form
+    setSelectedCity('');
+    setSelectedCategory('');
+    setSelectedRentDuration('');
+    setSelectedBrand('');
+    setShowSubmitButton(false);
   };
 
   return (
@@ -51,7 +73,9 @@ const SearchBar = () => {
         >
           <MenuItem value="">All</MenuItem>
           {cities.map((city) => (
-            <MenuItem value={city}>{city}</MenuItem>
+            <MenuItem key={city} value={city}>
+              {city}
+            </MenuItem>
           ))}
         </Select>
         <FormHelperText>Select a city</FormHelperText>
@@ -67,7 +91,9 @@ const SearchBar = () => {
         >
           <MenuItem value="">All</MenuItem>
           {categories.map((category) => (
-            <MenuItem value={category}>{category}</MenuItem>
+            <MenuItem key={category} value={category}>
+              {category}
+            </MenuItem>
           ))}
         </Select>
         <FormHelperText>Select a category</FormHelperText>
@@ -83,7 +109,9 @@ const SearchBar = () => {
         >
           <MenuItem value="">All</MenuItem>
           {rentDurations.map((duration) => (
-            <MenuItem value={duration}>{duration}</MenuItem>
+            <MenuItem key={duration} value={duration}>
+              {duration}
+            </MenuItem>
           ))}
         </Select>
         <FormHelperText>Select a rent duration</FormHelperText>
@@ -99,11 +127,19 @@ const SearchBar = () => {
         >
           <MenuItem value="">All</MenuItem>
           {brands.map((brand) => (
-            <MenuItem value={brand}>{brand}</MenuItem>
+            <MenuItem key={brand} value={brand}>
+              {brand}
+            </MenuItem>
           ))}
         </Select>
         <FormHelperText>Select a brand</FormHelperText>
       </FormControl>
+
+      {showSubmitButton && (
+        <Button variant="contained" onClick={handleFormSubmit}>
+          Submit
+        </Button>
+      )}
     </div>
   );
 };
