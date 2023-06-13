@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TextField, MenuItem } from '@mui/material';
+import { TextField, MenuItem, Button } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import '../styles/cradle.css';
 
@@ -130,11 +130,11 @@ function Cradles() {
             className="product-card"
           >
             <img src={cradle.image} alt="" onClick={() => handleProductClick(cradle._id)} />
-            <h3>{cradle.brand}</h3>
-            <span> From ${cradle.price} / day</span>
-            <button onClick={() => {
+            <h3>{cradle.name}</h3>
+            <span className='price'> From ${cradle.price} / day</span>
+            <Button variant="outlined" onClick={() => {
               console.log(`rent this product ${cradle.brand} ${cradle._id}`);
-            }}>Book now!</button>
+            }}>Book now!</Button>
           </div>
         ))}
       </div>

@@ -5,9 +5,15 @@
   align-items: center;
   margin: auto;
   width: 600px;
+  
 }
 
 
 .product-page-container img {
   width: 500px;
+}
+
+.product-page-container p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 }
