@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { TextField, MenuItem } from '@mui/material';
-import '../styles/cradle.css'
+import { useLocation } from 'react-router-dom';
+import '../styles/cradle.css';
 
 function Cradles() {
+  const location = useLocation();
   const [cradles, setCradles] = useState([]);
   const [filteredCradles, setFilteredCradles] = useState([]);
   const [searchBrand, setSearchBrand] = useState('');
@@ -66,66 +68,75 @@ function Cradles() {
     window.location.href = `/product/${productId}`;
   };
 
+  useEffect(() => {
+    if (location.state) {
+      const { selectedCity, selectedCategory, selectedRentDuration, selectedBrand } = location.state;
+      setSearchBrand(selectedBrand);
+      setSearchCity(selectedCity);
+      setSearchCategory(selectedCategory);
+    }
+  }, [location.state]);
+
 
   return (
     <div>
       <h2>Our cradles</h2>
       <div className="filter-cradles-bar">
-      <TextField
-        select
-        sx={{width: '150px'}}
-        label="Brand"
-        value={searchBrand}
-        onChange={handleSearchBrandChange}
-      >
-        {uniqueBrands.map(brand => (
-          <MenuItem key={brand} value={brand}>
-            {brand}
-          </MenuItem>
-        ))}
-      </TextField>
-      <TextField
-        sx={{width: '150px'}}
-        select
-        label="Search by city"
-        value={searchCity}
-        onChange={handleSearchCityChange}
-      >
-        {uniqueCities.map(city => (
-          <MenuItem key={city} value={city}>
-            {city}
-          </MenuItem>
-        ))}
-      </TextField>
-      <TextField
-        select
-        sx={{width: '150px'}}
-        label="Category"
-        value={searchCategory}
-        onChange={handleSearchCategoryChange}
-      >
-        {uniqueCategories.map(category => (
-          <MenuItem key={category} value={category}>
-            {category}
-          </MenuItem>
-        ))}
-      </TextField>
+        <TextField
+          select
+          sx={{ width: '150px' }}
+          label="Brand"
+          value={searchBrand}
+          onChange={handleSearchBrandChange}
+        >
+          {uniqueBrands.map(brand => (
+            <MenuItem key={brand} value={brand}>
+              {brand}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          sx={{ width: '150px' }}
+          select
+          label="Search by city"
+          value={searchCity}
+          onChange={handleSearchCityChange}
+        >
+          {uniqueCities.map(city => (
+            <MenuItem key={city} value={city}>
+              {city}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          select
+          sx={{ width: '150px' }}
+          label="Category"
+          value={searchCategory}
+          onChange={handleSearchCategoryChange}
+        >
+          {uniqueCategories.map(category => (
+            <MenuItem key={category} value={category}>
+              {category}
+            </MenuItem>
+          ))}
+        </TextField>
       </div>
 
-    <div className='filtered-cradles'>
-      {filteredCradles.map(cradle => (
-  <div
-    key={cradle._id}
-    className="product-card"
-  >
-    <img src={cradle.image} alt=""  onClick={() => handleProductClick(cradle._id)} />
-    <h3>{cradle.brand}</h3>
-    <span> From ${cradle.price} / day</span>
-    <button onClick={() => {
-      console.log(`rent this product ${cradle.brand} ${cradle._id}`)
-    }}>Book now!</button>
-  </div>
-))}
+      <div className='filtered-cradles'>
+        {filteredCradles.map(cradle => (
+          <div
+            key={cradle._id}
+            className="product-card"
+          >
+            <img src={cradle.image} alt="" onClick={() => handleProductClick(cradle._id)} />
+            <h3>{cradle.brand}</h3>
+            <span> From ${cradle.price} / day</span>
+            <button onClick={() => {
+              console.log(`rent this product ${cradle.brand} ${cradle._id}`);
+            }}>Book now!</button>
+          </div>
+        ))}
       </div>
     </div>
   );
