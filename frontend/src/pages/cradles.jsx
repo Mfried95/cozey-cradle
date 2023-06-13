@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { TextField, MenuItem } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 import '../styles/cradle.css'
 
 function Cradles() {
+  const location = useLocation();
   const [cradles, setCradles] = useState([]);
   const [filteredCradles, setFilteredCradles] = useState([]);
   const [searchBrand, setSearchBrand] = useState('');
@@ -65,6 +67,15 @@ function Cradles() {
     // Navigate to the product page using the product ID
     window.location.href = `/product/${productId}`;
   };
+
+  useEffect(() => {
+    if (location.state) {
+      const { selectedCity, selectedCategory, selectedRentDuration, selectedBrand } = location.state
+      setSearchBrand(selectedBrand)
+      setSearchCity(selectedCity)
+      setSearchCategory(selectedCategory)
+    }
+  },[location.state])
 
 
   return (
