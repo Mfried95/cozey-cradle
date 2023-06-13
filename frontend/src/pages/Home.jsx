@@ -1,16 +1,20 @@
 import React from 'react';
 import SearchBar from '../components/searchbar';
+import Footer from '../components/footer';
 
 const Home = () => {
   return (
     <div>
-      <section>
+      <div>
         <h1>Search for a cradle</h1>
         <SearchBar />
-      </section>
-      <section>
+      </div>     
+       <div className="home-image">
         <h1>How It Works</h1>
-      </section>
+      </div>
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 };
