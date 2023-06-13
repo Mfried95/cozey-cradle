@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Cradles from "./pages/Cradles";
 import Works from "./pages/Works";
 import ProductPage from "./pages/ProductPage";
+import Footer from "./components/footer";
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="works" element={<Works />} />
         <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
       </Routes>
+      <Footer />
     </div>
   );
 };

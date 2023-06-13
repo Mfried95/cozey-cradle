@@ -12,9 +12,7 @@ const Home = () => {
        <div className="home-image">
         <h1>How It Works</h1>
       </div>
-      <div>
-        <Footer />
-      </div>
+      
     </div>
   );
 };
