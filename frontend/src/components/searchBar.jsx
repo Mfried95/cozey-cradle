@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, FormHelperText, Select, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import '../styles/searchbar.css';
 
 const SearchBar = () => {
 
   const navigate = useNavigate();
   const [cities, setCities] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [rentDurations, setRentDurations] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [brands, setBrands] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedRentDuration, setSelectedRentDuration] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
   const [showSubmitButton, setShowSubmitButton] = useState(false);
 
@@ -21,7 +24,6 @@ const SearchBar = () => {
       .then(data => {
         setCities([...new Set(data.map(product => product.city))]);
         setCategories([...new Set(data.map(product => product.category))]);
-        setRentDurations([...new Set(data.map(product => product.rentDuration))]);
         setBrands([...new Set(data.map(product => product.brand))]);
       })
       .catch(error => console.error('Failed to fetch products:', error));
@@ -37,11 +39,6 @@ const SearchBar = () => {
     setShowSubmitButton(true);
   };
 
-  const handleRentDurationChange = (event) => {
-    setSelectedRentDuration(event.target.value);
-    setShowSubmitButton(true);
-  };
-
   const handleBrandChange = (event) => {
     setSelectedBrand(event.target.value);
     setShowSubmitButton(true);
@@ -53,18 +50,20 @@ const SearchBar = () => {
     // Do something with the selected options
     console.log('Selected City:', selectedCity);
     console.log('Selected Category:', selectedCategory);
-    console.log('Selected Rent Duration:', selectedRentDuration);
+    console.log('Selected Start Date:', startDate);
+    console.log('Selected End Date:', endDate);
     console.log('Selected Brand:', selectedBrand);
 
     // Reset the form
     setSelectedCity('');
     setSelectedCategory('');
-    setSelectedRentDuration('');
+    setStartDate(new Date());
+    setEndDate(new Date());
     setSelectedBrand('');
     setShowSubmitButton(false);
 
     // Navigate to the "Cradles" page
-    navigate('/Cradles', { state: { selectedCity, selectedCategory, selectedRentDuration, selectedBrand } });
+    navigate('/Cradles', { state: { selectedCity, selectedCategory, startDate, endDate, selectedBrand } });
   };
 
   return (
@@ -106,22 +105,15 @@ const SearchBar = () => {
       </FormControl>
 
       <FormControl>
-        <InputLabel id="rent-duration-label">Rent Duration</InputLabel>
-        <Select
-          labelId="rent-duration-label"
-          id="rent-duration-select"
-          value={selectedRentDuration}
-          onChange={handleRentDurationChange}
-        >
-          <MenuItem value="">All</MenuItem>
-          {rentDurations.map((duration, index) => (
-            <MenuItem key={duration+index} value={duration}>
-              {duration}
-            </MenuItem>
-          ))}
-        </Select>
-        <FormHelperText>Select a rent duration</FormHelperText>
+        <DatePicker className='datePicker' selected={startDate} onChange={date => setStartDate(date)} />
+      
+        <FormHelperText className='startDate'>Start Date</FormHelperText>
       </FormControl>
+
+        <FormControl>
+        <DatePicker className='datePicker' selected={endDate} onChange={date => setEndDate(date)} />
+        <FormHelperText className='endDate'>End Date</FormHelperText>
+        </FormControl>
 
       <FormControl>
         <InputLabel id="brand-label">Brand</InputLabel>
