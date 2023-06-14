@@ -91,11 +91,11 @@ app.post("/api/bookings", async (req, res) => {
     const database = client.db("cozeycradle");
     const bookings = database.collection("bookings");
 
-    const newBooking = req.body; // Get the new booking data from the request body
+    const myBookings = req.body.myBookings; // Get the myBookings array from the request body
+    console.log(myBookings);
+    //const result = await bookings.insertOne(newBooking); // Insert the new booking into the database
 
-    const result = await bookings.insertOne(newBooking); // Insert the new booking into the database
-
-    res.json(result.ops[0]); // Return the new booking as JSON response
+    //res.json(result.ops[0]); // Return the new booking as JSON response
   } catch (error) {
     console.error("Failed to insert booking into the database:", error);
     res.status(500).json({ error: "Failed to insert booking into the database" });
