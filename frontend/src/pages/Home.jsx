@@ -1,3 +1,4 @@
+
 import SearchBar from '../components/SearchBar';
 import '../styles/Home.css';
 
@@ -33,8 +34,6 @@ const Home = () => {
           <p>Enjoy peace of mind with our seamless payment process powered by Stripe, guaranteeing secure transactions. Once your payment is confirmed, you'll receive a confirmation email with all the details.</p>
         </div>
       </section>
-    </div>
-  );
 };
 
 export default Home;
