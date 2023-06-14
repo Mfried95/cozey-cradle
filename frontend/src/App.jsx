@@ -18,7 +18,6 @@ import BookingConfirmed from './pages/BookingConfirmed';
 import Footer from "./components/footer";
 
 
-
 const stripePromise = loadStripe('pk_test_51NDvUjGKWFRid3mJJjmf8swecnx2d7GX5ZChChQxEVya17DKHWNiboehU7lSllQuf1dkwIwf8gCUJCXuJDYoqiNv00uYCtWsjT');
 const App = () => {
 
@@ -35,10 +34,7 @@ const App = () => {
     setCheckout(state);
   };
 
-  // const options = {
-  //   // passing the client secret obtained from the server
-  //   clientSecret: 'pi_1EUmy5285d61s2cIUDDd7XEQ_secret_ZWIYZAGWyZlhayYSw6KncDR8K'
-  // };
+
 
   return (
 
