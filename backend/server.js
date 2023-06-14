@@ -58,6 +58,87 @@ app.get(`/api/products/:id`, async (req, res) => {
   }
 });
 
+// find bookings by id
+
+app.post("/api/products/:id/bookings", async (req, res) => {
+  try {
+    const database = client.db("cozeycradle");
+    const bookings = database.collection("bookings");
+
+    const bookingId = req.params.id; // Get the product ID from the request parameters
+
+    const booking = await bookings.findOne({ _id: new ObjectId(bookingId) }); // Find the product by ID
+
+    console.log("BOOKINGID", bookingId, booking);
+
+    if (booking) {
+      res.json(booking); // Return the product as JSON response
+    } else {
+      res.status(404).json({ error: "Booking not found" }); // Product with the specified ID was not found
+    }
+  } catch (error) {
+    console.error("Failed to fetch booking from the database:", error);
+    res
+      .status(500)
+      .json({ error: "Failed to fetch booking from the database" });
+  }
+});
+
+// edit bookings by id
+
+app.put("/api/bookings/:id", async (req, res) => {
+  try {
+    const database = client.db("cozeycradle");
+    const bookings = database.collection("bookings");
+
+    const bookingId = req.params.id; // Get the booking ID from the request parameters
+    const updatedBookingData = req.body; // Get the updated booking data from the request body
+
+    const booking = await bookings.findOne({ _id: new ObjectId(bookingId) }); // Find the booking by ID
+
+    if (!booking) {
+      return res.status(404).json({ error: "Booking not found" }); // Booking with the specified ID was not found
+    }
+
+    // Update the booking document with the new data
+    const updatedBooking = await bookings.findOneAndUpdate(
+      { _id: new ObjectId(bookingId) },
+      { $set: updatedBookingData },
+      { returnOriginal: false }
+    );
+
+    res.json(updatedBooking); // Return the updated booking as JSON response
+  } catch (error) {
+    console.error("Failed to update booking in the database:", error);
+    res.status(500).json({ error: "Failed to update booking in the database" });
+  }
+});
+
+// delete bookings by id
+
+app.delete("/api/bookings/:id", async (req, res) => {
+  try {
+    const database = client.db("cozeycradle");
+    const bookings = database.collection("bookings");
+
+    const bookingId = req.params.id; // Get the booking ID from the request parameters
+
+    const booking = await bookings.findOne({ _id: new ObjectId(bookingId) }); // Find the booking by ID
+
+    if (!booking) {
+      return res.status(404).json({ error: "Booking not found" }); // Booking with the specified ID was not found
+    }
+
+    // Delete the booking from the database
+    await bookings.deleteOne({ _id: new ObjectId(bookingId) });
+
+    res.json({ message: "Booking deleted successfully" }); // Return a success message as JSON response
+  } catch (error) {
+    console.error("Failed to delete booking from the database:", error);
+    res.status(500).json({ error: "Failed to delete booking from the database" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
   connectDb();
