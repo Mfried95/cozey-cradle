@@ -1,24 +1,58 @@
 import { Route, Routes } from "react-router-dom";
+import { useState } from 'react';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
 import Navbar from './components/navbar';
+
 import Home from "./pages/Home";
 import Cradles from "./pages/Cradles";
 import Works from "./pages/Works";
 import ProductPage from "./pages/ProductPage";
+
+
+import Bookings from "./pages/Bookings";
+import CheckoutForm from "./pages/CheckoutForm";
+import BookingConfirmed from './pages/BookingConfirmed';
+
 import Footer from "./components/footer";
 
 
+const stripePromise = loadStripe('pk_test_51NDvUjGKWFRid3mJJjmf8swecnx2d7GX5ZChChQxEVya17DKHWNiboehU7lSllQuf1dkwIwf8gCUJCXuJDYoqiNv00uYCtWsjT');
 const App = () => {
+
+  const [myBookings, setMyBookings] = useState([]);
+  const [displayCheckout, setCheckout] = useState(false);
+
+  const [message, setMessage] = useState('');
+
+  const handleBookings = function(cradle) {
+    setMyBookings(prevBookings => [...prevBookings, cradle]);
+  };
+
+  const handleCheckout = function(state) {
+    setCheckout(state);
+  };
+
+
+
   return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="cradles" element={<Cradles />} />
-        <Route path="works" element={<Works />} />
-        <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
-      </Routes>
-      <Footer />
-    </div>
+
+    <Elements stripe={stripePromise} >
+      <div>
+        <Navbar myBookings={myBookings} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="cradles" element={<Cradles handleBookings={handleBookings} />} />
+          <Route path="works" element={<Works />} />
+          <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
+          <Route path="bookings" element={<Bookings myBookings={myBookings} handleCheckout={handleCheckout} setMessage={setMessage} />} />
+          <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} />} /> {/* route for the confirmed bookings page */}
+        </Routes>
+      </div>
+      {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} message={message} setMessage={setMessage} myBookings={myBookings} />}
+
+    </Elements>
   );
 };
 
