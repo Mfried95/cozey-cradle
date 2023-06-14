@@ -9,17 +9,6 @@ import Home from "./pages/Home";
 import Cradles from "./pages/Cradles";
 import Works from "./pages/Works";
 import ProductPage from "./pages/ProductPage";
-<<<<<<< HEAD
-
-
-import Bookings from "./pages/Bookings";
-import CheckoutForm from "./pages/CheckoutForm";
-import BookingConfirmed from './pages/BookingConfirmed';
-
-import Footer from "./components/footer";
-
-
-=======
 
 
 import Bookings from "./pages/Bookings";
@@ -28,7 +17,6 @@ import BookingConfirmed from './pages/BookingConfirmed';
 
 
 
->>>>>>> dc9bf34 (Fixed missing files)
 const stripePromise = loadStripe('pk_test_51NDvUjGKWFRid3mJJjmf8swecnx2d7GX5ZChChQxEVya17DKHWNiboehU7lSllQuf1dkwIwf8gCUJCXuJDYoqiNv00uYCtWsjT');
 const App = () => {
 
