@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 
 import React from 'react';
+=======
+>>>>>>> dc9bf34 (Fixed missing files)
 import SearchBar from '../components/searchBar';
 
 
@@ -12,7 +15,10 @@ const Home = () => {
       <div>
         <h1>Search for a cradle</h1>
         <SearchBar />
+<<<<<<< HEAD
       </section>
+=======
+>>>>>>> dc9bf34 (Fixed missing files)
       <section className="how-it-works-section">
         <h1 className="heading">How It Works</h1>
         <p className="description">Renting a car seat with Cozey Cradle is easy and convenient. Here's how it works:</p>
@@ -37,6 +43,10 @@ const Home = () => {
           <p>Enjoy peace of mind with our seamless payment process powered by Stripe, guaranteeing secure transactions. Once your payment is confirmed, you'll receive a confirmation email with all the details.</p>
         </div>
       </section>
+<<<<<<< HEAD
+=======
+    </div>
+>>>>>>> dc9bf34 (Fixed missing files)
     </div>
   );
 };
