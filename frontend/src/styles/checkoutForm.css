@@ -1,0 +1,56 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent gray */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  /* White background for the form */
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+  max-width: 100%;
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content .form-group {
+  margin-bottom: 15px;
+  width: 100%;
+
+}
+
+.modal-content label {
+  font-weight: bold;
+}
+
+.modal-content button[type="submit"] {
+  background-color: #007bff;
+  /* Blue button color */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content button[type="submit"]:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}

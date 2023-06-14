@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import '../styles/bookings.css';
 
 const Bookings = (props) => {
-  const { myBookings } = props;
-  console.log(myBookings);
+  const { myBookings, handleCheckout } = props;
+  //console.log(myBookings);
 
   // Calculate the total cost of all products
   const totalCost = myBookings.reduce((acc, booking) => acc + booking.price, 0);
@@ -43,7 +43,7 @@ const Bookings = (props) => {
       </table>
 
       <div className="button-container">
-        <button className="checkout-button">Checkout</button>
+        <button className="checkout-button" onClick={() => handleCheckout('true')}>Checkout</button>
         <Link to="/Cradles" className="cradles-button">Back to Cradles</Link>
       </div>
 
