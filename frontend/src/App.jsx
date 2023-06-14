@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -16,8 +16,11 @@ import BookingConfirmed from './pages/BookingConfirmed';
 
 const stripePromise = loadStripe('pk_test_51NDvUjGKWFRid3mJJjmf8swecnx2d7GX5ZChChQxEVya17DKHWNiboehU7lSllQuf1dkwIwf8gCUJCXuJDYoqiNv00uYCtWsjT');
 const App = () => {
+
   const [myBookings, setMyBookings] = useState([]);
   const [displayCheckout, setCheckout] = useState(false);
+  
+  const [message, setMessage] = useState('')
 
   const handleBookings = function(cradle) {
     setMyBookings(prevBookings => [...prevBookings, cradle]);
@@ -42,11 +45,11 @@ const App = () => {
           <Route path="cradles" element={<Cradles handleBookings={handleBookings} />} />
           <Route path="works" element={<Works />} />
           <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
-          <Route path="bookings" element={<Bookings myBookings={myBookings} handleCheckout={handleCheckout} />} />
-          <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} />} /> {/* route for the confirmed bookings page */}
+          <Route path="bookings" element={<Bookings myBookings={myBookings} handleCheckout={handleCheckout} setMessage={setMessage} />} />
+          <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} />} /> {/* route for the confirmed bookings page */}
         </Routes>
       </div>
-      {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} />}
+      {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} message={message} setMessage={setMessage} />}
 
     </Elements>
   );

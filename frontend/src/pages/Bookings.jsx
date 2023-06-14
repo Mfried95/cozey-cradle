@@ -4,6 +4,7 @@ import '../styles/bookings.css';
 
 const Bookings = (props) => {
   const { myBookings, handleCheckout } = props;
+
   //console.log(myBookings);
 
   // Calculate the total cost of all products

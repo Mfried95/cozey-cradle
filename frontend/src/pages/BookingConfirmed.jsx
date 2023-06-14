@@ -1,11 +1,10 @@
-
-const BookingConfirmed = () => {
-
+const BookingConfirmed = (props) => {
+  
+  const { message } = props
+  
   return (
-
-    <h3> Your booking has been confirmed</h3>
+    <h3>{message}</h3>
   );
-
 };
 
 export default BookingConfirmed;

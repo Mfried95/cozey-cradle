@@ -1,11 +1,13 @@
 
-import React, { useState } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import '../styles/checkoutForm.css';
 
 const CheckoutForm = (props) => {
   const { handleCheckout } = props;
+  
+  const { setMessage } = props; 
+
 
   const stripe = useStripe();
   const elements = useElements();
@@ -23,16 +25,18 @@ const CheckoutForm = (props) => {
       type: 'card',
       card: cardElement,
     });
-
-    if (error) {
-      // Show error to your customer (for example, payment details incomplete)
-      console.log(result.error.message);
-    } else {
+    
+    if (paymentMethod) {
       console.log("success");
-      console.log(paymentMethod);
-
       navigate('/booking/confirmed');
+      setMessage('the booking was confirmed')
+      window.location.reload();
+    } else {
+      setMessage('Invalid payment');
+      console.log(error.message);
+      setMessage('the bookingis invalid')
     }
+
   };
 
   return (
