@@ -19,8 +19,8 @@ const App = () => {
 
   const [myBookings, setMyBookings] = useState([]);
   const [displayCheckout, setCheckout] = useState(false);
-  
-  const [message, setMessage] = useState('')
+
+  const [message, setMessage] = useState('');
 
   const handleBookings = function(cradle) {
     setMyBookings(prevBookings => [...prevBookings, cradle]);
@@ -49,7 +49,7 @@ const App = () => {
           <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} />} /> {/* route for the confirmed bookings page */}
         </Routes>
       </div>
-      {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} message={message} setMessage={setMessage} />}
+      {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} message={message} setMessage={setMessage} myBookings={myBookings} />}
 
     </Elements>
   );

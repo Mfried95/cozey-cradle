@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/checkoutForm.css';
 
 const CheckoutForm = (props) => {
-  const { handleCheckout } = props;
-  
-  const { setMessage } = props; 
+  const { handleCheckout, myBookings, setMessage } = props;
+
+  //const { setMessage } = props; 
 
 
   const stripe = useStripe();
@@ -25,16 +25,16 @@ const CheckoutForm = (props) => {
       type: 'card',
       card: cardElement,
     });
-    
+
     if (paymentMethod) {
       console.log("success");
       navigate('/booking/confirmed');
-      setMessage('the booking was confirmed')
+      setMessage('the booking was confirmed');
       window.location.reload();
     } else {
       setMessage('Invalid payment');
       console.log(error.message);
-      setMessage('the bookingis invalid')
+      setMessage('the bookingis invalid');
     }
 
   };
@@ -43,7 +43,7 @@ const CheckoutForm = (props) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <div>
-          <form onSubmit={handleSubmit}>
+          <form className="form-container" onSubmit={handleSubmit}>
             <div className="card-details">
               <label>
                 Card Details

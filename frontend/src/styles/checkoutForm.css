@@ -2,55 +2,54 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  /* Semi-transparent gray */
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 9999;
 }
 
 .modal-content {
   background-color: #fff;
-  /* White background for the form */
   padding: 20px;
-  border-radius: 5px;
-  width: 400px;
-  max-width: 100%;
+  width: 70%;
+  max-width: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.modal-content h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.modal-content form {
+.form-container label {
   display: flex;
   flex-direction: column;
 }
 
-.modal-content .form-group {
-  margin-bottom: 15px;
-  width: 100%;
-
+.form-container label span {
+  margin-bottom: 5px;
 }
 
-.modal-content label {
-  font-weight: bold;
+.form-container input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
-.modal-content button[type="submit"] {
+button[type="submit"] {
+  padding: 10px 20px;
   background-color: #007bff;
-  /* Blue button color */
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 3px;
   cursor: pointer;
 }
 
-.modal-content button[type="submit"]:disabled {
-  background-color: #999;
+button[type="submit"]:disabled {
+  background-color: #ccc;
   cursor: not-allowed;
 }
