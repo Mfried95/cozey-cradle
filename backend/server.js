@@ -84,6 +84,24 @@ app.post("/api/products/:id/bookings", async (req, res) => {
   }
 });
 
+// when user makes a booking
+
+app.post("/api/bookings", async (req, res) => {
+  try {
+    const database = client.db("cozeycradle");
+    const bookings = database.collection("bookings");
+
+    const newBooking = req.body; // Get the new booking data from the request body
+
+    const result = await bookings.insertOne(newBooking); // Insert the new booking into the database
+
+    res.json(result.ops[0]); // Return the new booking as JSON response
+  } catch (error) {
+    console.error("Failed to insert booking into the database:", error);
+    res.status(500).json({ error: "Failed to insert booking into the database" });
+  }
+});
+
 // edit bookings by id
 
 app.put("/api/bookings/:id", async (req, res) => {
