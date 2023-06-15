@@ -87,10 +87,9 @@ app.post("/bookings", async (req, res) => {
     const database = client.db("cozeycradle");
     const bookings = database.collection("bookings");
 
-    const { userID, productID, status, startDate, endDate } = req.body; // Get the booking data from the request body
-    
+    const { productID, status, startDate, endDate } = req.body; // Get the booking data from the request body
+
     const newBooking = {
-      userID,
       productID,
       status,
       startDate,
@@ -98,7 +97,7 @@ app.post("/bookings", async (req, res) => {
     };
 
     const result = await bookings.insertOne(newBooking); // Insert the new booking into the collection
-    
+
     console.log(result);
 
     if (result.acknowledged) {

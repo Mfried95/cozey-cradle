@@ -4,7 +4,6 @@ import '../styles/bookings.css';
 const Bookings = (props) => {
   const { myBookings, handleCheckout } = props;
 
-  //console.log(myBookings);
 
   // Calculate the total cost of all products
   const totalCost = myBookings.reduce((acc, booking) => acc + booking.price, 0);
@@ -29,7 +28,7 @@ const Bookings = (props) => {
                 <img src={booking.image} alt={booking.name} style={{ width: '100px' }} />
               </td>
               <td>${booking.price}</td>
-              <td>{/* Number of days input field */}</td>
+              <td>{/* Number of days input field */}1</td>
               <td>${booking.price}</td>
             </tr>
           ))}
