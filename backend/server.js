@@ -1,32 +1,27 @@
 const express = require("express");
-const { MongoClient, ObjectId } = require("mongodb");
 const cors = require("cors");
+const Booking = require("./models/Booking");
+const Product = require("./models/Product");
+const connectDb = require("./db");
 
 const app = express();
 app.use(cors());
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 const port = 3000;
 
-const uri =
-  "mongodb+srv://cozeycradle:s2EpenbL4JpBBABN@cozeycradle.w07iyp9.mongodb.net/";
-const client = new MongoClient(uri);
+// const uri =
+//   "mongodb+srv://cozeycradle:s2EpenbL4JpBBABN@cozeycradle.w07iyp9.mongodb.net/";
+// const client = new MongoClient(uri);
 
-const connectDb = async () => {
-  try {
-    await client.connect();
-    console.log("Connected to the database");
-  } catch (error) {
-    console.error("Failed to connect to the database:", error);
-  }
-};
+connectDb()
 
 // Find all products
 app.get("/api/products", async (req, res) => {
   try {
-    const database = client.db("cozeycradle");
-    const products = database.collection("products");
-    const allProducts = await products.find().toArray();
-    res.json(allProducts);
+    const products = await Product.find({});
+    console.log("PRODUCTS", products);
+    res.json(products);
   } catch (error) {
     console.error("Failed to fetch movies from the database:", error);
     res.status(500).json({ error: "Failed to fetch movies from the database" });
@@ -36,12 +31,9 @@ app.get("/api/products", async (req, res) => {
 // Find products by id
 app.get(`/api/products/:id`, async (req, res) => {
   try {
-    const database = client.db("cozeycradle");
-    const products = database.collection("products");
-
     const productId = req.params.id; // Get the product ID from the request parameters
 
-    const product = await products.findOne({ _id: new ObjectId(productId) }); // Find the product by ID
+    const product = await Product.findOne({ _id: new ObjectId(productId) }); // Find the product by ID
 
     console.log("PRODUCTID", productId, product);
 
@@ -88,14 +80,13 @@ app.post("/api/products/:id/bookings", async (req, res) => {
 
 app.post("/api/bookings", async (req, res) => {
   try {
-    const database = client.db("cozeycradle");
-    const bookings = database.collection("bookings");
-
     const myBookings = req.body.myBookings; // Get the myBookings array from the request body
     console.log(myBookings);
-    //const result = await bookings.insertOne(newBooking); // Insert the new booking into the database
-
-    //res.json(result.ops[0]); // Return the new booking as JSON response
+    const result = await Booking.collection.insertOne(myBookings[0]); // Insert the new booking into the database
+    console.log(result);
+    const booking = await Booking.findOne({ _id: result.insertedId }); // Find the newly added booking by its ID
+    res.json(booking); // Return the new booking as JSON response
+    
   } catch (error) {
     console.error("Failed to insert booking into the database:", error);
     res.status(500).json({ error: "Failed to insert booking into the database" });
@@ -159,5 +150,4 @@ app.delete("/api/bookings/:id", async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
-  connectDb();
 });
