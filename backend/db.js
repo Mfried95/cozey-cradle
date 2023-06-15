@@ -1,24 +1,18 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require('mongoose');
 
-const uri = "mongodb+srv://cozeycradle:s2EpenbL4JpBBABN@cozeycradle.w07iyp9.mongodb.net/";
-const client = new MongoClient(uri);
+// const uri = "mongodb+srv://cozeycradle:s2EpenbL4JpBBABN@cozeycradle.w07iyp9.mongodb.net/";
+const uri = "mongodb+srv://cozeycradle:s2EpenbL4JpBBABN@cozeycradle.w07iyp9.mongodb.net/cozeycradle?retryWrites=true&w=majority";
 
-const connectDb = async() => {
-  let connection;
+const connectDb = async () => {
   try {
-    connection = await client.connect();
-    const database = connection.db("cozeycradle"); // choose database
-    const products = database.collection("products"); // choose collection
-    
-    console.log(products);
-    // Perform operations on the products collection or interact with the database here
-
-  } finally {
-    if (connection) {
-      connection.close();
-    }
+   const connection = await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+     // Sync all models
+    //  await mongoose.connection.syncIndexes();
+        // console.log('All models synced successfully.');
+    console.log("Connected to the database");
+  } catch (error) {
+    console.error("Failed to connect to the database:", error);
   }
 };
 
-connectDb().catch(console.dir);
-
+module.exports = connectDb;

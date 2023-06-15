@@ -28,6 +28,10 @@ const CheckoutForm = (props) => {
     if (paymentMethod) {
       console.log("success");
       console.log(myBookings);
+      booking = []
+      myBookings.forEach(booking => {
+        booking.push({userId : booking.userId, status: booking.status, startDate : booking.startDate, endDate : booking.endDate});
+      });
       try {
         const response = await axios.post("http://localhost:3000/api/bookings", {
           myBookings: myBookings
