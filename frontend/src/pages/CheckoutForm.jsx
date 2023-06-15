@@ -5,7 +5,7 @@ import '../styles/checkoutForm.css';
 import axios from 'axios';
 
 const CheckoutForm = (props) => {
-  const { handleCheckout, myBookings, setMessage } = props;
+  const { myBookings, setMessage } = props;
 
 
   const stripe = useStripe();
@@ -27,14 +27,17 @@ const CheckoutForm = (props) => {
 
     if (paymentMethod) {
       console.log("success");
-      console.log(myBookings);
-      const booking = []
-      myBookings.forEach(booking => {
-        booking.push({userId : booking.userId, status: booking.status, startDate : booking.startDate, endDate : booking.endDate});
+      const bookings = [];
+      myBookings.forEach((booking) => {
+        console.log(booking._id);
+        bookings.push(booking._id);
       });
       try {
         const response = await axios.post("http://localhost:3000/bookings", {
-          myBookings: booking
+          productID: bookings,
+          status: true,
+          startDate: "2023-06-15",
+          endDate: "2023-06-20"
         });
         if (response.data.success) {
           console.log("Successful Payment");
@@ -64,7 +67,7 @@ const CheckoutForm = (props) => {
                 <CardElement />
               </label>
             </div>
-            <button type="submit" disabled={!stripe} onClick={() => handleCheckout('false')}>
+            <button type="submit" disabled={!stripe}>
               Pay
             </button>
           </form>
