@@ -3,6 +3,7 @@ import { TextField, MenuItem, Button } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useLocation, Link } from 'react-router-dom';
 import '../styles/cradle.css';
 
 function Cradles(props) {
@@ -80,10 +81,10 @@ function Cradles(props) {
     setSearchCategory(event.target.value);
   };
 
-  const handleProductClick = (productId) => {
-    // Navigate to the product page using the product ID
-    window.location.href = `/product/${productId}`;
-  };
+  // const handleProductClick = (productId) => {
+  //   // Navigate to the product page using the product ID
+  //   window.location.href = `/product/${productId}`;
+  // };
 
   useEffect(() => {
     if (location.state) {
@@ -146,7 +147,11 @@ function Cradles(props) {
             key={cradle._id}
             className="product-card"
           >
-            <img src={cradle.image} alt="" onClick={() => handleProductClick(cradle._id)} />
+            <div>
+              <Link to={`/product/${cradle._id}`}>
+                <img src={cradle.image} alt="" />
+              </Link>
+            </div>
             <h3>{cradle.brand}</h3>
             <span> From ${cradle.price} / day</span>
             <h3>{cradle.name}</h3>
