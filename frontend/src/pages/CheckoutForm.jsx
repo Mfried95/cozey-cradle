@@ -3,14 +3,17 @@ import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import '../styles/checkoutForm.css';
 import axios from 'axios';
+import moment from 'moment';
 
 const CheckoutForm = (props) => {
   const { myBookings, setMessage } = props;
 
-
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
+
+  let startDate = moment(localStorage.getItem('startDate')).format('YYYY-MM-DD');
+  let endDate = moment(localStorage.getItem('endDate')).format('YYYY-MM-DD');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,15 +32,14 @@ const CheckoutForm = (props) => {
       console.log("success");
       const bookings = [];
       myBookings.forEach((booking) => {
-        console.log(booking._id);
         bookings.push(booking._id);
       });
       try {
         const response = await axios.post("http://localhost:3000/bookings", {
           productID: bookings,
           status: true,
-          startDate: "2023-06-15",
-          endDate: "2023-06-20"
+          startDate: startDate,
+          endDate: endDate
         });
         if (response.data.success) {
           console.log("Successful Payment");
@@ -45,13 +47,15 @@ const CheckoutForm = (props) => {
         navigate('/booking/confirmed');
         setMessage('the booking was confirmed');
         window.location.reload();
+        localStorage.removeItem('startDate');
+        localStorage.removeItem('endDate');
       } catch (error) {
         console.log("Error", error);
       }
     } else {
       setMessage('Invalid payment');
       console.log(error.message);
-      setMessage('the bookingis invalid');
+      setMessage('the booking is invalid');
     }
 
   };

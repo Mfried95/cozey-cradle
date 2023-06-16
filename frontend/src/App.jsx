@@ -4,6 +4,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
 import Navbar from './components/navbar';
+import SearchBar from "./components/searchBar";
 
 import Home from "./pages/Home";
 import Cradles from "./pages/Cradles";
@@ -19,7 +20,7 @@ import BookingConfirmed from './pages/BookingConfirmed';
 
 const stripePromise = loadStripe('pk_test_51NDvUjGKWFRid3mJJjmf8swecnx2d7GX5ZChChQxEVya17DKHWNiboehU7lSllQuf1dkwIwf8gCUJCXuJDYoqiNv00uYCtWsjT');
 const App = () => {
-
+   
   const [myBookings, setMyBookings] = useState([]);
   const [displayCheckout, setCheckout] = useState(false);
 
@@ -41,11 +42,11 @@ const App = () => {
       <div>
         <Navbar myBookings={myBookings} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home SearchBar={SearchBar} />} />
           <Route path="cradles" element={<Cradles handleBookings={handleBookings} />} />
           <Route path="works" element={<Works />} />
           <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
-          <Route path="bookings" element={<Bookings myBookings={myBookings} handleCheckout={handleCheckout} setMessage={setMessage} />} />
+          <Route path="bookings" element={<Bookings myBookings={myBookings} handleCheckout={handleCheckout} setMessage={setMessage}  />} />
           <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} />} /> {/* route for the confirmed bookings page */}
         </Routes>
       </div>
