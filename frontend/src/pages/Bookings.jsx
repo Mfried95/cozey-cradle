@@ -3,18 +3,28 @@ import moment from 'moment';
 import '../styles/bookings.css';
 
 const Bookings = (props) => {
-  const { myBookings, handleCheckout } = props;
+  const { myBookings, handleCheckout, handleOrderProduct } = props;
   // const totalCost = myBookings.reduce((acc, booking) => acc + booking.price * numberOfDays, 0);
 
   // Calculate the number of days between start date and end date
-  let startDate = moment(localStorage.getItem('startDate')).format('YYYY-MM-DD');
-  let endDate = moment(localStorage.getItem('endDate')).format('YYYY-MM-DD');
+  let startDate = moment(localStorage.getItem('startDate')).format('YYYY-MM-DD') || moment().format('YYYY-MM-DD');
+  let endDate = moment(localStorage.getItem('endDate')).format('YYYY-MM-DD') || moment().format('YYYY-MM-DD');
 
   // const numberOfDays = differenceInDays(endDate, startDate);
-  const numberOfDays = moment(endDate).diff(moment(startDate), 'days');
+  const numberOfDays = moment(endDate).diff(moment(startDate), 'days') || 1;
 
   // Calculate the total cost of all products
   const totalCost = myBookings?.reduce((acc, booking) => acc + (booking.price * numberOfDays), 0);
+
+const product = myBookings.map((booking, index) => {
+  return {
+    image: booking.image,
+    name: booking.name,
+    price: booking.price,
+    numberOfDays: numberOfDays,
+    totalPrice: booking.price * numberOfDays
+  }
+});
 
   return (
     <div className="bookings-container">
@@ -50,7 +60,10 @@ const Bookings = (props) => {
       </table>
 
       <div className="button-container">
-        <button className="checkout-button" onClick={() => handleCheckout('true')}>Checkout</button>
+        <button className="checkout-button" onClick={() => {
+          handleCheckout('true');
+          handleOrderProduct(product);
+        }}>Checkout</button>
         <Link to="/Cradles" className="cradles-button">Back to Cradles</Link>
       </div>
 
