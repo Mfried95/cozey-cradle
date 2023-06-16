@@ -44,7 +44,7 @@ const CheckoutForm = (props) => {
     } else {
       setMessage('Invalid payment');
       console.log(error.message);
-      setMessage('the bookingis invalid');
+      setMessage('the booking is invalid');
     }
 
   };

@@ -1,14 +1,21 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import moment from 'moment';
 import '../styles/bookings.css';
 
 const Bookings = (props) => {
   const { myBookings, handleCheckout } = props;
+  // const totalCost = myBookings.reduce((acc, booking) => acc + booking.price * numberOfDays, 0);
 
-  //console.log(myBookings);
+  // Calculate the number of days between start date and end date
+  let startDate = moment(localStorage.getItem('startDate')).format('YYYY-MM-DD');
+  let endDate = moment(localStorage.getItem('endDate')).format('YYYY-MM-DD');
+  
+  // const numberOfDays = differenceInDays(endDate, startDate);
+  const numberOfDays = moment(endDate).diff(moment(startDate), 'days');
 
-  // Calculate the total cost of all products
-  const totalCost = myBookings.reduce((acc, booking) => acc + booking.price, 0);
+   // Calculate the total cost of all products
+   const totalCost = myBookings?.reduce((acc, booking) => acc + (booking.price * numberOfDays), 0);
 
   return (
     <div className="bookings-container">
@@ -30,13 +37,13 @@ const Bookings = (props) => {
                 <img src={booking.image} alt={booking.name} style={{ width: '100px' }} />
               </td>
               <td>${booking.price}</td>
-              <td>{/* Number of days input field */}</td>
-              <td>${booking.price}</td>
+              <td>{numberOfDays}</td>
+              <td>${booking.price * numberOfDays}</td>
             </tr>
           ))}
         </tbody>
         <tfoot>
-          <tr >
+          <tr>
             <td colSpan="3">Total Cost of All Products:</td>
             <td>${totalCost}</td>
           </tr>
@@ -49,9 +56,7 @@ const Bookings = (props) => {
       </div>
 
     </div>
-
   );
-
 };
 
 export default Bookings;
