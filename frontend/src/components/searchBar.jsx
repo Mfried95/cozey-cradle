@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, FormHelperText, Select, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import '../styles/searchbar.css';
 
 const SearchBar = () => {
-
   const navigate = useNavigate();
   const [cities, setCities] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [rentDurations, setRentDurations] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [brands, setBrands] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedRentDuration, setSelectedRentDuration] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
-  const [showSubmitButton, setShowSubmitButton] = useState(false);
+  const [showSubmitButton, setShowSubmitButton] = useState(true);
+  // set local storage startDate to current date
+  localStorage.setItem('startDate', startDate);
 
   useEffect(() => {
     fetch('http://localhost:3000/api/products')
@@ -21,57 +25,59 @@ const SearchBar = () => {
       .then(data => {
         setCities([...new Set(data.map(product => product.city))]);
         setCategories([...new Set(data.map(product => product.category))]);
-        setRentDurations([...new Set(data.map(product => product.rentDuration))]);
         setBrands([...new Set(data.map(product => product.brand))]);
       })
       .catch(error => console.error('Failed to fetch products:', error));
   }, []);
 
-  const handleCityChange = (event) => {
+  const handleCityChange = event => {
     setSelectedCity(event.target.value);
     setShowSubmitButton(true);
   };
 
-  const handleCategoryChange = (event) => {
+  const handleCategoryChange = event => {
     setSelectedCategory(event.target.value);
     setShowSubmitButton(true);
   };
 
-  const handleRentDurationChange = (event) => {
-    setSelectedRentDuration(event.target.value);
-    setShowSubmitButton(true);
-  };
-
-  const handleBrandChange = (event) => {
+  const handleBrandChange = event => {
     setSelectedBrand(event.target.value);
     setShowSubmitButton(true);
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = event => {
     event.preventDefault();
 
     // Do something with the selected options
     console.log('Selected City:', selectedCity);
     console.log('Selected Category:', selectedCategory);
-    console.log('Selected Rent Duration:', selectedRentDuration);
+    console.log('Selected Start Date:', startDate);
+    console.log('Selected End Date:', endDate);
     console.log('Selected Brand:', selectedBrand);
 
     // Reset the form
     setSelectedCity('');
     setSelectedCategory('');
-    setSelectedRentDuration('');
     setSelectedBrand('');
     setShowSubmitButton(false);
 
     // Navigate to the "Cradles" page
-    navigate('/Cradles', { state: { selectedCity, selectedCategory, selectedRentDuration, selectedBrand } });
+    navigate('/Cradles', {
+      state: {
+        selectedCity,
+        selectedCategory,
+        startDate,
+        endDate,
+        selectedBrand,
+      },
+    });
   };
 
   return (
     <div>
       <FormControl>
         <InputLabel id="city-label">City</InputLabel>
-        <Select 
+        <Select
           labelId="city-label"
           id="city-select"
           value={selectedCity}
@@ -79,7 +85,7 @@ const SearchBar = () => {
         >
           <MenuItem value="">All</MenuItem>
           {cities.map((city, index) => (
-            <MenuItem key={city+index} value={city}>
+            <MenuItem key={city + index} value={city}>
               {city}
             </MenuItem>
           ))}
@@ -97,30 +103,12 @@ const SearchBar = () => {
         >
           <MenuItem value="">All</MenuItem>
           {categories.map((category, index) => (
-            <MenuItem key={category+index} value={category}>
+            <MenuItem key={category + index} value={category}>
               {category}
             </MenuItem>
           ))}
         </Select>
         <FormHelperText>Select a category</FormHelperText>
-      </FormControl>
-
-      <FormControl>
-        <InputLabel id="rent-duration-label">Rent Duration</InputLabel>
-        <Select
-          labelId="rent-duration-label"
-          id="rent-duration-select"
-          value={selectedRentDuration}
-          onChange={handleRentDurationChange}
-        >
-          <MenuItem value="">All</MenuItem>
-          {rentDurations.map((duration, index) => (
-            <MenuItem key={duration+index} value={duration}>
-              {duration}
-            </MenuItem>
-          ))}
-        </Select>
-        <FormHelperText>Select a rent duration</FormHelperText>
       </FormControl>
 
       <FormControl>
@@ -133,12 +121,30 @@ const SearchBar = () => {
         >
           <MenuItem value="">All</MenuItem>
           {brands.map((brand, index) => (
-            <MenuItem key={brand+index} value={brand}>
+            <MenuItem key={brand + index} value={brand}>
               {brand}
             </MenuItem>
           ))}
         </Select>
         <FormHelperText>Select a brand</FormHelperText>
+      </FormControl>
+
+      <FormControl>
+        <DatePicker
+          className="datePicker"
+          selected={startDate}
+          onChange={date => { setStartDate(date); localStorage.setItem('startDate', date); }}
+        />
+        <FormHelperText className="startDate">Start Date</FormHelperText>
+      </FormControl>
+
+      <FormControl>
+        <DatePicker
+          className="datePicker"
+          selected={endDate}
+          onChange={date => { setEndDate(date); localStorage.setItem('endDate', date); }}
+        />
+        <FormHelperText className="endDate">End Date</FormHelperText>
       </FormControl>
 
       {showSubmitButton && (
