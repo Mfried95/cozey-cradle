@@ -34,7 +34,6 @@ const App = () => {
   };
 
 
-
   return (
 
     <Elements stripe={stripePromise} >

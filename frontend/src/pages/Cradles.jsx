@@ -28,6 +28,7 @@ function Cradles(props) {
       .catch(error => console.error('Failed to fetch products:', error));
   }, []);
 
+
   useEffect(() => {
     let filteredByBrand = cradles;
     if (searchBrand !== 'All') {
