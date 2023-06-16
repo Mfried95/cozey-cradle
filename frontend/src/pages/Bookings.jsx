@@ -9,12 +9,12 @@ const Bookings = (props) => {
   // Calculate the number of days between start date and end date
   let startDate = moment(localStorage.getItem('startDate')).format('YYYY-MM-DD');
   let endDate = moment(localStorage.getItem('endDate')).format('YYYY-MM-DD');
-  
+
   // const numberOfDays = differenceInDays(endDate, startDate);
   const numberOfDays = moment(endDate).diff(moment(startDate), 'days');
 
-   // Calculate the total cost of all products
-   const totalCost = myBookings?.reduce((acc, booking) => acc + (booking.price * numberOfDays), 0);
+  // Calculate the total cost of all products
+  const totalCost = myBookings?.reduce((acc, booking) => acc + (booking.price * numberOfDays), 0);
 
   return (
     <div className="bookings-container">
