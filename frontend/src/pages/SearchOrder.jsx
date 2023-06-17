@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import "../styles/search.css";
@@ -65,21 +64,21 @@ const SearchOrder = () => {
   return (
     <form onSubmit={handleSearch}>
       <div className="search-id">
-      <input
-  type="text"
-  placeholder="Search by booking ID"
-  value={searchTerm}
-  onChange={handleInputChange}
-  onClick={clearSearchTerm}
-  className="search-input"
-/>
+        <input
+          type="text"
+          placeholder="Search by booking ID"
+          value={searchTerm}
+          onChange={handleInputChange}
+          onClick={clearSearchTerm}
+          className="search-input"
+        />
         <Button
           variant="outlined"
           sx={{
             color: "black",
             backgroundColor: "rgb(186, 148, 222)",
-            padding: '8px',
-            width: '150px',
+            padding: "8px",
+            width: "150px",
             border: "solid grey 1px",
             "&:hover": {
               backgroundColor: "white",
@@ -90,7 +89,6 @@ const SearchOrder = () => {
         >
           Search
         </Button>
-        
       </div>
       <p className="error-message">{error}</p>
       {matchedBooking ? (
@@ -109,11 +107,11 @@ const SearchOrder = () => {
               <tr>
                 <td>
                   {productData && (
-                     <div>
-                     <Link to={`/product/${productData._id}`}>
-                       <img src={productData.image} alt="" />
-                     </Link>
-                   </div>
+                    <div>
+                      <Link to={`/product/${productData._id}`}>
+                        <img src={productData.image} alt="" />
+                      </Link>
+                    </div>
                   )}
                 </td>
                 <td>{productData && productData.name}</td>
@@ -124,7 +122,7 @@ const SearchOrder = () => {
           </table>
         </div>
       ) : (
-          <p></p>
+        <p></p>
       )}
     </form>
   );
