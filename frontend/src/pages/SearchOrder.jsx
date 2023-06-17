@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+import "../styles/search.css";
 
 const SearchOrder = () => {
   const [bookings, setBookings] = useState([]);
@@ -26,8 +28,8 @@ const SearchOrder = () => {
       return;
     }
 
-    const foundBooking = bookings.find(
-      (booking) => booking._id.endsWith(searchTerm)
+    const foundBooking = bookings.find((booking) =>
+      booking._id.endsWith(searchTerm)
     );
 
     if (foundBooking) {
@@ -62,48 +64,66 @@ const SearchOrder = () => {
 
   return (
     <form onSubmit={handleSearch}>
-    <TextField
-      label="Search by booking ID"
-      variant="outlined"
-      value={searchTerm}
-      onChange={handleInputChange}
-      onClick={clearSearchTerm}
-    />
-    <Button variant="contained" type="submit">
-      Search
-    </Button>
-    {matchedBooking ? (
-      <div className="bookings-container">
-        <h2>Order details for ID: {matchedBooking._id.slice(-4)}</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Product Image</th>
-              <th>Product Name</th>
-              <th>Product Duration</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                {productData && (
-                  <img
-                    src={productData.image}
-                    alt={productData.name}
-                    style={{ width: "100px" }}
-                  />
-                )}
-              </td>
-              <td>{productData && productData.name}</td>
-              <td>{productData && productData.duration}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="search-id">
+        <TextField
+          label="Search by booking ID"
+          variant="outlined"
+          value={searchTerm}
+          onChange={handleInputChange}
+          onClick={clearSearchTerm}
+        />
+        <Button
+          variant="outlined"
+          sx={{
+            color: "black",
+            backgroundColor: "rgb(186, 148, 222)",
+            border: "solid grey 1px",
+            "&:hover": {
+              backgroundColor: "white",
+              border: "solid grey 1px",
+            },
+          }}
+          type="submit"
+        >
+          Search
+        </Button>
+        
       </div>
-    ) : (
-      <p>{error}</p>
-    )}
-  </form>
+      <p className="error-message">{error}</p>
+      {matchedBooking ? (
+        <div className="bookings-container">
+          <h2>Order details for ID: {matchedBooking._id.slice(-4)}</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Product Image</th>
+                <th>Product Name</th>
+                <th>Product Duration</th>
+                <th>Total Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {productData && (
+                     <div>
+                     <Link to={`/product/${productData._id}`}>
+                       <img src={productData.image} alt="" />
+                     </Link>
+                   </div>
+                  )}
+                </td>
+                <td>{productData && productData.name}</td>
+                <td>{productData && productData.startDate}</td>
+                <td>{productData && productData.price}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      ) : (
+          <p></p>
+      )}
+    </form>
   );
 };
 
