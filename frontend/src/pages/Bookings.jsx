@@ -36,7 +36,7 @@ const Bookings = (props) => {
         <thead>
           <tr>
             <th>Product Image</th>
-            <th>Product Quanity</th>
+            <th>Product Quantity</th>
             <th>Price per Day</th>
             <th>Number of Days</th>
             <th>Total Price</th>
