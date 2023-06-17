@@ -65,18 +65,21 @@ const SearchOrder = () => {
   return (
     <form onSubmit={handleSearch}>
       <div className="search-id">
-        <TextField
-          label="Search by booking ID"
-          variant="outlined"
-          value={searchTerm}
-          onChange={handleInputChange}
-          onClick={clearSearchTerm}
-        />
+      <input
+  type="text"
+  placeholder="Search by booking ID"
+  value={searchTerm}
+  onChange={handleInputChange}
+  onClick={clearSearchTerm}
+  className="search-input"
+/>
         <Button
           variant="outlined"
           sx={{
             color: "black",
             backgroundColor: "rgb(186, 148, 222)",
+            padding: '8px',
+            width: '150px',
             border: "solid grey 1px",
             "&:hover": {
               backgroundColor: "white",
