@@ -30,6 +30,11 @@ const App = () => {
     setMyBookings(prevBookings => [...prevBookings, cradle]);
   };
 
+
+  const removeBooking = function(id) {
+    setMyBookings(myBookings.filter(booking => { return booking._id !== id; }));
+  };
+
   const handleCheckout = function(state) {
     setCheckout(state);
   };
@@ -46,7 +51,7 @@ const App = () => {
           <Route path="cradles" element={<Cradles handleBookings={handleBookings} />} />
           <Route path="works" element={<Works />} />
           <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
-          <Route path="bookings" element={<Bookings myBookings={myBookings} handleCheckout={handleCheckout} setMessage={setMessage}  />} />
+          <Route path="bookings" element={<Bookings myBookings={myBookings} removeBooking={removeBooking} handleCheckout={handleCheckout} setMessage={setMessage} />} />
           <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} />} /> {/* route for the confirmed bookings page */}
         </Routes>
       </div>
