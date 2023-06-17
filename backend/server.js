@@ -87,10 +87,11 @@ app.post("/bookings", async (req, res) => {
     const database = client.db("cozeycradle");
     const bookings = database.collection("bookings");
 
-    const { productID, status, startDate, endDate } = req.body; // Get the booking data from the request body
+    const { productID, productQuantities, status, startDate, endDate } = req.body; // Get the booking data from the request body
 
     const newBooking = {
       productID,
+      productQuantities,
       status,
       startDate,
       endDate

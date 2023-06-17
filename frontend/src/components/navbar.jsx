@@ -11,7 +11,7 @@ const Navbar = (props) => {
         <Link to="/Cradles">Cradles</Link>
         <Link to="/Works">How it works</Link>
         <Link to="/bookings"> My Bookings
-          {myBookings.length > 0 && myBookings.length}
+          {myBookings.length > 0 && myBookings?.reduce((acc, booking) => acc + booking.quantity, 0)}
         </Link>
       </div>
     </div>
