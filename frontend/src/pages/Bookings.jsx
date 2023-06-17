@@ -16,7 +16,7 @@ const Bookings = (props) => {
   const numberOfDays = moment(endDate).diff(moment(startDate), 'days');
 
   // Calculate the total cost of all products
-  const totalCost = myBookings?.reduce((acc, booking) => acc + (booking.price * numberOfDays), 0);
+  const totalCost = myBookings?.reduce((acc, booking) => acc + (booking.price * numberOfDays * booking.quantity), 0);
 
 
   useEffect(() => {
@@ -36,6 +36,7 @@ const Bookings = (props) => {
         <thead>
           <tr>
             <th>Product Image</th>
+            <th>Product Quanity</th>
             <th>Price per Day</th>
             <th>Number of Days</th>
             <th>Total Price</th>
@@ -54,15 +55,16 @@ const Bookings = (props) => {
                   <DeleteIcon />
                 </IconButton>
               </td>
+              <td>{booking.quantity}</td>
               <td>${booking.price}</td>
               <td>{numberOfDays}</td>
-              <td>${booking.price * numberOfDays}</td>
+              <td>${booking.price * numberOfDays * booking.quantity}</td>
             </tr>
           ))}
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan="3">Total Cost of All Products:</td>
+            <td colSpan="4">Total Cost of All Products:</td>
             <td>${totalCost}</td>
           </tr>
         </tfoot>

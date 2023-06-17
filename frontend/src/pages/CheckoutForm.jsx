@@ -31,12 +31,15 @@ const CheckoutForm = (props) => {
     if (paymentMethod) {
       console.log("success");
       const bookings = [];
+      const quantities = [];
       myBookings.forEach((booking) => {
         bookings.push(booking._id);
+        quantities.push(booking.quantity);
       });
       try {
         const response = await axios.post("http://localhost:3000/bookings", {
           productID: bookings,
+          productQuantities: quantities,
           status: true,
           startDate: startDate,
           endDate: endDate
