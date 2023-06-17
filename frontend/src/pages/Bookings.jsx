@@ -43,7 +43,9 @@ const product = myBookings.map((booking, index) => {
           {myBookings.map((booking, index) => (
             <tr key={index}>
               <td>
-                <img src={booking.image} alt={booking.name} style={{ width: '100px' }} />
+                <Link to={`/product/${booking._id}`}>
+                  <img src={booking.image} alt={booking.name} style={{ width: '100px' }} />
+                </Link>
               </td>
               <td>${booking.price}</td>
               <td>{numberOfDays}</td>
