@@ -129,3 +129,29 @@ const SearchOrder = () => {
 };
 
 export default SearchOrder;
+
+
+
+{/* <h2>Order History</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Order Date</th>
+            <th>Product Name</th>
+            <th>Price per Day</th>
+            <th>Number of Days</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orderHistory.map((order, index) => (
+            <tr key={index}>
+              <td>{order.orderDate}</td>
+              <td>{order.productName}</td>
+              <td>${order.price}</td>
+              <td>{order.numberOfDays}</td>
+              <td>${order.price}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table> */}
