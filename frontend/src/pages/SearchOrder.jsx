@@ -6,6 +6,7 @@ const SearchOrder = () => {
   const [bookings, setBookings] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [matchedBooking, setMatchedBooking] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:3000/bookings")
@@ -13,33 +14,49 @@ const SearchOrder = () => {
       .then((data) => {
         setBookings(data);
       })
-      .catch((error) => console.error("Failed to fetch bookings:", error));
+      .catch((error) =>
+        console.error("Failed to fetch bookings:", error)
+      );
   }, []);
 
   const handleSearch = () => {
     if (searchTerm.length !== 5) {
-      console.log("Must enter in 5 digit booking id");
+      setError("Must enter a 5-digit booking ID");
       return;
     }
 
-    const foundBooking = bookings.find((booking) =>
-      booking._id.endsWith(searchTerm)
+    const foundBooking = bookings.find(
+      (booking) => booking._id.endsWith(searchTerm)
     );
-    setMatchedBooking(foundBooking);
+
+    if (foundBooking) {
+      setMatchedBooking(foundBooking);
+      setError("");
+    } else {
+      setMatchedBooking(null);
+      setError("No match found");
+    }
+
     setSearchTerm("");
   };
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
+    setError('')
+  };
+
+  const clearSearchTerm = () => {
+    setSearchTerm("");
   };
 
   return (
     <div>
       <TextField
-        label="Search by Last 4 Digits of Booking ID"
+        label="Search by booking ID"
         variant="outlined"
         value={searchTerm}
         onChange={handleInputChange}
+        onClick={clearSearchTerm}
       />
       <Button variant="contained" onClick={handleSearch}>
         Search
@@ -50,7 +67,7 @@ const SearchOrder = () => {
           {console.log(matchedBooking)}
         </ul>
       ) : (
-        <p>No matching booking found.</p>
+        <p>{error}</p>
       )}
     </div>
   );
