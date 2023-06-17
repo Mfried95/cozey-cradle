@@ -42,7 +42,9 @@ const App = () => {
 
   const handleOrderHistory = function (history) {
     console.log("call handleOrderHistory")
-    setOrderHistory(prevHistory => [...prevHistory, history]);
+    // setOrderHistory(prevHistory => [...prevHistory, history]);
+    setOrderHistory(history);
+    console.log("orderHistory", history)
   };
 
   const handleOrderProduct = function (product) {
@@ -50,7 +52,6 @@ const App = () => {
     setOrderProduct(product);
   }; 
 
-  console.log(orderHistory);
   return (
 
     <Elements stripe={stripePromise} >
@@ -65,7 +66,7 @@ const App = () => {
           <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} bookingDetails={bookingDetails} orderHistory={orderHistory} orderProduct={orderProduct} />} /> {/* route for the confirmed bookings page */}
         </Routes>
       </div>
-      {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} message={message} setMessage={setMessage} myBookings={myBookings} handleOrderHistory={handleOrderHistory} />}
+      {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} message={message} setMessage={setMessage} myBookings={myBookings} handleOrderHistory={handleOrderHistory} setMyBookings={setMyBookings} />}
 
     </Elements>
   );

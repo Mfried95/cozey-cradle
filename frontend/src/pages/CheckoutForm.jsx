@@ -6,7 +6,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 const CheckoutForm = (props) => {
-  const { myBookings, setMessage, handleOrderHistory, handleCheckout } = props;
+  const { myBookings, setMessage, handleOrderHistory, handleCheckout, setMyBookings } = props;
   console.log(myBookings)
 
   const stripe = useStripe();
@@ -36,22 +36,30 @@ const CheckoutForm = (props) => {
         bookings.push(booking._id);
       });
       try {
+        console.log("bookings", myBookings);
         const response = await axios.post("http://localhost:3000/bookings", {
-          productID: bookings,
+          productID: bookings[0],
+          productName: myBookings[0].name,
+          price: myBookings[0].price,
           status: true,
           startDate: startDate,
-          endDate: endDate
+          endDate: endDate,
+          numberOfDays: moment(endDate).diff(moment(startDate), 'days'),
         });
         console.log(response);
         if (response.data.success) {
           console.log("Successful Payment");
-          handleOrderHistory({
-            orderDate: moment().format('YYYY-MM-DD'),
-            productName: myBookings.name,
-            price: myBookings.price,
-            numberOfDays: moment(endDate).diff(moment(startDate), 'days'),
-            totalPrice: myBookings.price * moment(endDate).diff(moment(startDate), 'days')
-          });
+          // handleOrderHistory({
+          //   orderDate: moment().format('YYYY-MM-DD'),
+          //   productName: myBookings.name,
+          //   price: myBookings.price,
+          //   numberOfDays: moment(endDate).diff(moment(startDate), 'days'),
+          //   totalPrice: myBookings.price * moment(endDate).diff(moment(startDate), 'days')
+          // });
+          handleOrderHistory(response.data.data.allOrders);
+          console.log("response.data.allOrders", response.data.data.allOrders);
+          console.log("response.data", response.data);
+          setMyBookings([]);
           setMessage('the booking was confirmed');
           localStorage.removeItem('startDate');
           localStorage.removeItem('endDate');

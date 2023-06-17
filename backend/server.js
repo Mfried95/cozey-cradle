@@ -83,21 +83,25 @@ app.get("/bookings", async (req, res) => {
 
 // post new booking 
 app.post("/bookings", async (req, res) => {
+  console.log("REQUEST BODY", req.body);
   try {
     const database = client.db("cozeycradle");
     const bookings = database.collection("bookings");
     const products = database.collection("products");
-    const { productID, status, startDate, endDate } = req.body; // Get the booking data from the request body
+    const { productID, status, startDate, endDate, productName, price } = req.body; // Get the booking data from the request body
 
     const newBooking = {
       productID,
       status,
       startDate,
-      endDate
+      endDate,
+      productName,
+      price
     };
 
     const result = await bookings.insertOne(newBooking); // Insert the new booking into the collection
-    const product = await products.findOne({ _id: new ObjectId(productID) }); // Find the product by ID
+    const allOrders = await bookings.find().toArray();
+    // const product = await products.findOne({ _id: new ObjectId(productID) }); // Find the product by ID
     console.log(result);
 
     if (result.acknowledged) {
@@ -105,7 +109,8 @@ app.post("/bookings", async (req, res) => {
         success: true,
         message: 'Created new booking',
         data : {
-          product: product,
+          allOrders: allOrders,
+          // product: product,
 
         }
       }); // Return the created booking as JSON response

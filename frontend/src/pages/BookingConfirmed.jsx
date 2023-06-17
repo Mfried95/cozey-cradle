@@ -2,18 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const BookingConfirmed = (props) => {
-  const { orderProduct } = props;
+  const { orderProduct, orderHistory } = props;
   console.log(orderProduct);
 
-  const orderHistory = orderProduct.map((product) => {
-    return {
-      orderDate: new Date().toLocaleDateString(),
-      productName: product.name,
-      price: product.price,
-      numberOfDays: product.numberOfDays,
-      totalPrice: product.totalPrice,
-    };
-  });
+  // const orderHistory = orderProduct.map((product) => {
+  //   return {
+  //     orderDate: new Date().toLocaleDateString(),
+  //     productName: product.name,
+  //     price: product.price,
+  //     numberOfDays: product.numberOfDays,
+  //     totalPrice: product.totalPrice,
+  //   };
+  // });
 
   return (
     <div className="confirmation-container">
@@ -48,7 +48,7 @@ const BookingConfirmed = (props) => {
         </tbody>
       </table>
 
-      <h2>Order History</h2>
+      {/* <h2>Order History</h2>
       <table>
         <thead>
           <tr>
@@ -66,11 +66,11 @@ const BookingConfirmed = (props) => {
               <td>{order.productName}</td>
               <td>${order.price}</td>
               <td>{order.numberOfDays}</td>
-              <td>${order.totalPrice}</td>
+              <td>${order.price}</td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
 
       <div className="button-container">
         <Link to="/cradles" className="bookings-button">Back to Other Cradles for Rent!</Link>
