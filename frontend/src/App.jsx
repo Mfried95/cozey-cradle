@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { ToastContainer } from 'react-toastify';
 
 import Navbar from './components/navbar';
 import SearchBar from "./components/searchBar";
@@ -40,6 +41,7 @@ const App = () => {
 
     <Elements stripe={stripePromise} >
       <div>
+      <ToastContainer />
         <Navbar myBookings={myBookings} />
         <Routes>
           <Route path="/" element={<Home SearchBar={SearchBar} />} />
