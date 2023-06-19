@@ -26,7 +26,7 @@ const App = () => {
   const [bookingDetails, setBookingDetails] = useState({});//new state for the booking details
   const [message, setMessage] = useState('');
   const [orderHistory, setOrderHistory] = useState([]);//new state for the order history
-  const [orderProduct, setOrderProduct] = useState([]);//new state for the order history
+  const [orderProduct, setOrderProduct] = useState({});//new state for the order history
 
   const handleBookings = function(cradle) {
     // check if cardle already in the list
@@ -80,7 +80,7 @@ const App = () => {
           <Route path="cradles" element={<Cradles handleBookings={handleBookings} />} />
           <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
           <Route path="bookings" element={<Bookings myBookings={myBookings} removeBooking={removeBooking} handleCheckout={handleCheckout} setMessage={setMessage} />} />
-          <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} orderProduct={[orderProduct]} />} /> {/* route for the confirmed bookings page */}
+          <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} orderProduct={orderProduct} />} /> {/* route for the confirmed bookings page */}
           <Route path="/search" element={<SearchOrder/>} />
         </Routes>
       </div>

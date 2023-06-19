@@ -1,6 +1,7 @@
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
 const cors = require("cors");
+const { find } = require("./models/Booking");
 
 const app = express();
 app.use(cors());
@@ -121,9 +122,22 @@ app.post("/bookings", async (req, res) => {
     const result = await bookings.insertOne(newBooking); // Insert the new booking into the collection
 
     console.log(result);
+    const productResult = [];
+    for (let i = 0; i < productID.length; i++) {
+      const _Product = await database.collection("products").findOne({ _id: new ObjectId(productID[i]) });
+      const findProduct = {};      
+      findProduct.productID = _Product._id;
+      findProduct.productName = _Product.name;
+      findProduct.productImage = _Product.image;
+      findProduct.productPrice = _Product.price;
+      findProduct.quantity = productQuantities[i];
+      findProduct.totalPrice = findProduct.quantity * findProduct.productPrice;
+      findProduct.numberOfDays = Math.ceil(Math.abs(new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
 
+      productResult.push(findProduct);
+    }
     if (result.acknowledged) {
-      res.status(201).json('Created new booking'); // Return the created booking as JSON response
+      res.status(201).json({ success: true, message: "Created new booking", data: {productResult, bookingID: result.insertedId} }); // Return the created booking as JSON response
     } else {
       res.status(500).json({ error: "Failed to create booking" }); // Failed to create the booking
     }

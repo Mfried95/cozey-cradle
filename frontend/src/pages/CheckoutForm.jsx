@@ -49,17 +49,18 @@ const CheckoutForm = (props) => {
         console.log(response);
         if (response.data.success) {
           console.log("Successful Payment");
-          handleOrderProduct({
-            productImage: myBookings[0].image,
-            productQuantities: quantities,
-            orderDate: moment().format('YYYY-MM-DD'),
-            productName: myBookings.name,
-            price: myBookings.price,
-            numberOfDays: moment(endDate).diff(moment(startDate), 'days'),
-            totalPrice: myBookings[0].price * moment(endDate).diff(moment(startDate), 'days')
-          });
+          handleOrderProduct(
+            // productImage: myBookings[0].image,
+            // productQuantities: quantities,
+            // orderDate: moment().format('YYYY-MM-DD'),
+            // productName: myBookings.name,
+            // price: myBookings.price,
+            // numberOfDays: moment(endDate).diff(moment(startDate), 'days'),
+            // totalPrice: myBookings[0].price * moment(endDate).diff(moment(startDate), 'days')
+            response.data.data
+          );
           // handleOrderHistory(response.data.data.allOrders);
-          console.log("response.data.allOrders", response.data.data.allOrders);
+          console.log("response.data.allOrders", response.data.message);
           console.log("response.data", response.data);
           setMyBookings([]);
           setMessage('the booking was confirmed');

@@ -20,27 +20,30 @@ const BookingConfirmed = (props) => {
       <h1>Order Confirmation</h1>
 
       <h2>Booking Details</h2>
+      <h2>Order ID {orderProduct.bookingID}</h2>
       <table>
         <thead>
           <tr>
+            <th>Product ID</th>
             <th>Product Image</th>
             <th>Product Quantity</th>
-            <th>Product Name</th>
+            <th>Product Name </th>
             <th>Price per Day</th>
             <th>Number of Days</th>
             <th>Total Price</th>
           </tr>
         </thead>
         <tbody>
-          {orderProduct.map((product, index) => {
+          {orderProduct.productResult.map((product, index) => {
             return (
               <tr key={index}>
+                <td>{product.productID}</td>
                 <td>
                   <img src={product.productImage} alt={product.productName} style={{ width: '100px' }} />
                 </td>
-                <td>{product.productQuantities}</td>
+                <td>{product.quantity}</td>
                 <td>{product.productName}</td>
-                <td>${product.price}</td>
+                <td>${product.productPrice}</td>
                 <td>{product.numberOfDays}</td>
                 <td>${product.totalPrice}</td>
                 </tr>
