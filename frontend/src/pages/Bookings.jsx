@@ -14,7 +14,8 @@ const Bookings = (props) => {
   let endDate = moment(localStorage.getItem('endDate')).format('YYYY-MM-DD') || moment().format('YYYY-MM-DD');
 
   // const numberOfDays = differenceInDays(endDate, startDate);
-  const numberOfDays = moment(endDate).diff(moment(startDate), 'days') || 1;
+  const numberOfDays = moment(endDate).diff(moment(startDate), 'days');
+  console.log("startDate", startDate, "endDate", endDate);
 
   // Calculate the total cost of all products
   const totalCost = myBookings?.reduce((acc, booking) => acc + (booking.price * numberOfDays * booking.quantity), 0);

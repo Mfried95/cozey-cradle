@@ -67,6 +67,9 @@ const SearchBar = () => {
     setSelectedBrand('');
     setShowSubmitButton(false);
 
+    localStorage.setItem('startDate', startDate);
+    localStorage.setItem('endDate', endDate);
+
     navigate('/Cradles', {
       state: {
         selectedCity,

@@ -6,7 +6,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 const CheckoutForm = (props) => {
-  const { myBookings, setMessage, handleOrderHistory, handleCheckout, setMyBookings } = props;
+  const { myBookings, setMessage, handleOrderProduct, handleCheckout, setMyBookings } = props;
   console.log(myBookings)
 
   const stripe = useStripe();
@@ -43,7 +43,6 @@ const CheckoutForm = (props) => {
           productID: bookings[0],
           productName: myBookings[0].name,
           price: myBookings[0].price,
-          productID: bookings,
           productQuantities: quantities,
           status: true,
           startDate: startDate,
@@ -53,20 +52,22 @@ const CheckoutForm = (props) => {
         console.log(response);
         if (response.data.success) {
           console.log("Successful Payment");
-          // handleOrderHistory({
-          //   orderDate: moment().format('YYYY-MM-DD'),
-          //   productName: myBookings.name,
-          //   price: myBookings.price,
-          //   numberOfDays: moment(endDate).diff(moment(startDate), 'days'),
-          //   totalPrice: myBookings.price * moment(endDate).diff(moment(startDate), 'days')
-          // });
-          handleOrderHistory(response.data.data.allOrders);
+          handleOrderProduct({
+            productImage: myBookings[0].image,
+            productQuantities: quantities,
+            orderDate: moment().format('YYYY-MM-DD'),
+            productName: myBookings[0].name,
+            price: myBookings[0].price,
+            numberOfDays: moment(endDate).diff(moment(startDate), 'days'),
+            totalPrice: myBookings[0].price * moment(endDate).diff(moment(startDate), 'days')
+          });
+          // handleOrderHistory(response.data.data.allOrders);
           console.log("response.data.allOrders", response.data.data.allOrders);
           console.log("response.data", response.data);
           setMyBookings([]);
           setMessage('the booking was confirmed');
-          localStorage.removeItem('startDate');
-          localStorage.removeItem('endDate');
+          // localStorage.removeItem('startDate');
+          // localStorage.removeItem('endDate');
           handleCheckout(false);
           navigate('/booking/confirmed');
           // window.location.href='/booking/confirmed';

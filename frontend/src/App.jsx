@@ -80,11 +80,11 @@ const App = () => {
           <Route path="cradles" element={<Cradles handleBookings={handleBookings} />} />
           <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
           <Route path="bookings" element={<Bookings myBookings={myBookings} removeBooking={removeBooking} handleCheckout={handleCheckout} setMessage={setMessage} />} />
-          <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} />} /> {/* route for the confirmed bookings page */}
+          <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} orderProduct={[orderProduct]} />} /> {/* route for the confirmed bookings page */}
           <Route path="/search" element={<SearchOrder/>} />
         </Routes>
       </div>
-      {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} message={message} setMessage={setMessage} myBookings={myBookings} handleOrderHistory={handleOrderHistory} setMyBookings={setMyBookings} />}
+      {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} message={message} setMessage={setMessage} myBookings={myBookings} handleOrderHistory={handleOrderHistory} handleOrderProduct={handleOrderProduct} setMyBookings={setMyBookings} />}
 
     </Elements>
   );
