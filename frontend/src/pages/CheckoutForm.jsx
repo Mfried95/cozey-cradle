@@ -3,14 +3,17 @@ import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import '../styles/checkoutForm.css';
 import axios from 'axios';
+import moment from 'moment';
 
 const CheckoutForm = (props) => {
-  const { handleCheckout, myBookings, setMessage } = props;
-
+  const { myBookings, setMessage } = props;
 
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
+
+  let startDate = moment(localStorage.getItem('startDate')).format('YYYY-MM-DD');
+  let endDate = moment(localStorage.getItem('endDate')).format('YYYY-MM-DD');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,10 +30,19 @@ const CheckoutForm = (props) => {
 
     if (paymentMethod) {
       console.log("success");
-      console.log(myBookings);
+      const bookings = [];
+      const quantities = [];
+      myBookings.forEach((booking) => {
+        bookings.push(booking._id);
+        quantities.push(booking.quantity);
+      });
       try {
-        const response = await axios.post("http://localhost:3000/api/bookings", {
-          myBookings: myBookings
+        const response = await axios.post("http://localhost:3000/bookings", {
+          productID: bookings,
+          productQuantities: quantities,
+          status: true,
+          startDate: startDate,
+          endDate: endDate
         });
         if (response.data.success) {
           console.log("Successful Payment");
@@ -38,6 +50,8 @@ const CheckoutForm = (props) => {
         navigate('/booking/confirmed');
         setMessage('the booking was confirmed');
         window.location.reload();
+        localStorage.removeItem('startDate');
+        localStorage.removeItem('endDate');
       } catch (error) {
         console.log("Error", error);
       }
@@ -60,7 +74,7 @@ const CheckoutForm = (props) => {
                 <CardElement />
               </label>
             </div>
-            <button type="submit" disabled={!stripe} onClick={() => handleCheckout('false')}>
+            <button type="submit" disabled={!stripe}>
               Pay
             </button>
           </form>

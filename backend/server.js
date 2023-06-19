@@ -5,6 +5,10 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 
+// Add the body parsing middleware
+app.use(express.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true }));
+
 const port = 3000;
 
 const uri =
@@ -58,53 +62,60 @@ app.get(`/api/products/:id`, async (req, res) => {
   }
 });
 
-// find bookings by id
-
-app.post("/api/products/:id/bookings", async (req, res) => {
+// get bookings 
+app.get("/bookings", async (req, res) => {
   try {
     const database = client.db("cozeycradle");
     const bookings = database.collection("bookings");
 
-    const bookingId = req.params.id; // Get the product ID from the request parameters
+    const booking = await bookings.find().toArray(); // Retrieve all bookings
 
-    const booking = await bookings.findOne({ _id: new ObjectId(bookingId) }); // Find the product by ID
-
-    console.log("BOOKINGID", bookingId, booking);
-
-    if (booking) {
-      res.json(booking); // Return the product as JSON response
+    if (booking.length > 0) {
+      res.json(booking); // Return the bookings as JSON response
     } else {
-      res.status(404).json({ error: "Booking not found" }); // Product with the specified ID was not found
+      res.status(404).json({ error: "No bookings found" }); // No bookings found in the database
     }
   } catch (error) {
-    console.error("Failed to fetch booking from the database:", error);
-    res
-      .status(500)
-      .json({ error: "Failed to fetch booking from the database" });
+    console.error("Failed to fetch bookings from the database:", error);
+    res.status(500).json({ error: "Failed to fetch bookings from the database" });
   }
 });
 
-// when user makes a booking
-
-app.post("/api/bookings", async (req, res) => {
+// post new booking 
+app.post("/bookings", async (req, res) => {
   try {
     const database = client.db("cozeycradle");
     const bookings = database.collection("bookings");
 
-    const myBookings = req.body.myBookings; // Get the myBookings array from the request body
-    console.log(myBookings);
-    //const result = await bookings.insertOne(newBooking); // Insert the new booking into the database
+    const { productID, productQuantities, status, startDate, endDate } = req.body; // Get the booking data from the request body
 
-    //res.json(result.ops[0]); // Return the new booking as JSON response
+    const newBooking = {
+      productID,
+      productQuantities,
+      status,
+      startDate,
+      endDate
+    };
+
+    const result = await bookings.insertOne(newBooking); // Insert the new booking into the collection
+
+    console.log(result);
+
+    if (result.acknowledged) {
+      res.status(201).json('Created new booking'); // Return the created booking as JSON response
+    } else {
+      res.status(500).json({ error: "Failed to create booking" }); // Failed to create the booking
+    }
   } catch (error) {
-    console.error("Failed to insert booking into the database:", error);
-    res.status(500).json({ error: "Failed to insert booking into the database" });
+    console.error("Failed to create booking:", error);
+    res.status(500).json({ error: "Failed to create booking" });
   }
 });
+
 
 // edit bookings by id
 
-app.put("/api/bookings/:id", async (req, res) => {
+app.put("/api/bookings", async (req, res) => {
   try {
     const database = client.db("cozeycradle");
     const bookings = database.collection("bookings");
@@ -132,8 +143,8 @@ app.put("/api/bookings/:id", async (req, res) => {
   }
 });
 
-// delete bookings by id
 
+// delete bookings by id
 app.delete("/api/bookings/:id", async (req, res) => {
   try {
     const database = client.db("cozeycradle");
