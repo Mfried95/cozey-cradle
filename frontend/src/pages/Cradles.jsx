@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { TextField, MenuItem, Button } from '@mui/material';
-
+import { FormControl, TextField, MenuItem, Button, FormHelperText } from '@mui/material';
+import DatePicker from 'react-datepicker'; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,6 +16,8 @@ function Cradles(props) {
   const [searchBrand, setSearchBrand] = useState('');
   const [searchCity, setSearchCity] = useState('');
   const [searchCategory, setSearchCategory] = useState('');
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [uniqueCities, setUniqueCities] = useState([]);
   const [uniqueCategories, setUniqueCategories] = useState([]);
   const [uniqueBrands, setUniqueBrands] = useState([]);
@@ -29,7 +31,7 @@ function Cradles(props) {
     draggable: true,
     progress: undefined,
     theme: "light",
-    });
+  });
 
 
   useEffect(() => {
@@ -96,6 +98,14 @@ function Cradles(props) {
     }
   }, [location.state]);
 
+  const handleFormSubmit = event => {
+    event.preventDefault();
+
+    if (!startDate && !endDate) {
+      toast.error('Please select both start and end dates.');
+      return;
+    }
+  };
 
   return (
     <div>
@@ -140,6 +150,29 @@ function Cradles(props) {
             </MenuItem>
           ))}
         </TextField>
+        <FormControl>
+          <DatePicker
+            className="datePicker"
+            selected={startDate}
+            onChange={date => setStartDate(date)}
+            placeholderText="Start Date"
+          />
+          <FormHelperText className="startDate">Start Date</FormHelperText>
+        </FormControl>
+
+        <FormControl>
+          <DatePicker
+            className="datePicker"
+            selected={endDate}
+            onChange={date => setEndDate(date)}
+            placeholderText="End Date"
+          />
+          <FormHelperText className="endDate">End Date</FormHelperText>
+        </FormControl>
+
+          <Button variant="contained" onClick={handleFormSubmit}>
+            Submit
+          </Button>
       </div>
 
       <div className='filtered-cradles'>
@@ -158,16 +191,16 @@ function Cradles(props) {
             <h3>{cradle.name}</h3>
             <span className='price'> From ${cradle.price} / day</span>
             <Button variant="outlined" sx={{
-            color: "black",
-            backgroundColor: "rgb(186, 148, 222)",
-            padding: "8px",
-            width: "150px",
-            border: "solid grey 1px",
-            "&:hover": {
-              backgroundColor: "white",
+              color: "black",
+              backgroundColor: "rgb(186, 148, 222)",
+              padding: "8px",
+              width: "150px",
               border: "solid grey 1px",
-            },
-          }} onClick={() => { handleBookings(cradle); notify() }}>Book now!</Button>
+              "&:hover": {
+                backgroundColor: "white",
+                border: "solid grey 1px",
+              },
+            }} onClick={() => { handleBookings(cradle); notify() }}>Book now!</Button>
           </div>
         ))}
         <ToastContainer />
