@@ -11,7 +11,7 @@ import Home from "./pages/Home";
 import Cradles from "./pages/Cradles";
 import Works from "./pages/Works";
 import ProductPage from "./pages/ProductPage";
-
+import SearchOrder from "./pages/SearchOrder";
 
 import Bookings from "./pages/Bookings";
 import CheckoutForm from "./pages/CheckoutForm";
@@ -53,7 +53,6 @@ const App = () => {
   };
 
 
-
   return (
 
     <Elements stripe={stripePromise} >
@@ -67,6 +66,7 @@ const App = () => {
           <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
           <Route path="bookings" element={<Bookings myBookings={myBookings} removeBooking={removeBooking} handleCheckout={handleCheckout} setMessage={setMessage} />} />
           <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} />} /> {/* route for the confirmed bookings page */}
+          <Route path="/search" element={<SearchOrder/>} />
         </Routes>
       </div>
       {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} message={message} setMessage={setMessage} myBookings={myBookings} />}

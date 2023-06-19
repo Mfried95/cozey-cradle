@@ -5,11 +5,15 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 const Navbar = (props) => {
   const { myBookings } = props;
   return (
-    <div className="nav-container">
+    <nav className="nav-container">
+      
       <h2>Cozey Cradle</h2>
       <div className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/Cradles">Cradles</Link>
+
+        <Link to="/search">Search Order</Link>
+
         <Link to="/Works">How it works</Link>
 
         {/* <Link to="/bookings"> <AddShoppingCartIcon />
@@ -23,7 +27,7 @@ const Navbar = (props) => {
 
         </Link>
       </div>
-    </div>
+    </nav>
   );
 };
 
