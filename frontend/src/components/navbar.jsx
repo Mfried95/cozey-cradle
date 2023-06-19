@@ -14,8 +14,6 @@ const Navbar = (props) => {
 
         <Link to="/search">Search Order</Link>
 
-        <Link to="/Works">How it works</Link>
-
         {/* <Link to="/bookings"> <AddShoppingCartIcon />
           {myBookings.length > 0 && myBookings?.reduce((acc, booking) => acc + booking.quantity, 0)}
         </Link> */}

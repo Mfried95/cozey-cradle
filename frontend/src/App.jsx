@@ -9,7 +9,6 @@ import SearchBar from "./components/searchBar";
 
 import Home from "./pages/Home";
 import Cradles from "./pages/Cradles";
-import Works from "./pages/Works";
 import ProductPage from "./pages/ProductPage";
 import SearchOrder from "./pages/SearchOrder";
 
@@ -62,7 +61,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home SearchBar={SearchBar} />} />
           <Route path="cradles" element={<Cradles handleBookings={handleBookings} />} />
-          <Route path="works" element={<Works />} />
           <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
           <Route path="bookings" element={<Bookings myBookings={myBookings} removeBooking={removeBooking} handleCheckout={handleCheckout} setMessage={setMessage} />} />
           <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} />} /> {/* route for the confirmed bookings page */}
