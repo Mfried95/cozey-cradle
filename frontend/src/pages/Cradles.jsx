@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
 import { TextField, MenuItem, Button } from '@mui/material';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useLocation, Link } from 'react-router-dom';
 import '../styles/cradle.css';
 
@@ -16,6 +20,18 @@ function Cradles(props) {
   const [uniqueCategories, setUniqueCategories] = useState([]);
   const [uniqueBrands, setUniqueBrands] = useState([]);
 
+  const notify = () => toast.success('Added to your bookings', {
+    position: "top-right",
+    autoClose: 800,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
+
+
   useEffect(() => {
     fetch('http://localhost:3000/api/products')
       .then(response => response.json())
@@ -27,6 +43,7 @@ function Cradles(props) {
       })
       .catch(error => console.error('Failed to fetch products:', error));
   }, []);
+
 
   useEffect(() => {
     let filteredByBrand = cradles;
@@ -140,9 +157,20 @@ function Cradles(props) {
             <span> From ${cradle.price} / day</span>
             <h3>{cradle.name}</h3>
             <span className='price'> From ${cradle.price} / day</span>
-            <Button variant="outlined" onClick={() => { handleBookings(cradle); }}>Book now!</Button>
+            <Button variant="outlined" sx={{
+            color: "black",
+            backgroundColor: "rgb(186, 148, 222)",
+            padding: "8px",
+            width: "150px",
+            border: "solid grey 1px",
+            "&:hover": {
+              backgroundColor: "white",
+              border: "solid grey 1px",
+            },
+          }} onClick={() => { handleBookings(cradle); notify() }}>Book now!</Button>
           </div>
         ))}
+        <ToastContainer />
       </div>
     </div>
   );

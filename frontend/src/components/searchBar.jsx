@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, FormHelperText, Select, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from 'react-datepicker';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-datepicker/dist/react-datepicker.css';
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/searchbar.css';
 
 const SearchBar = () => {
+  
   const navigate = useNavigate();
   const [cities, setCities] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [brands, setBrands] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
   const [showSubmitButton, setShowSubmitButton] = useState(true);
-  // set local storage startDate to current date
-  localStorage.setItem('startDate', startDate);
 
   useEffect(() => {
     fetch('http://localhost:3000/api/products')
@@ -48,20 +49,24 @@ const SearchBar = () => {
   const handleFormSubmit = event => {
     event.preventDefault();
 
-    // Do something with the selected options
+    console.log('startDate:', startDate, 'endDate:', endDate);
+    console.log("toast", toast)
+    if (!startDate && !endDate) {
+      toast.error('Please select both start and end dates.');
+      return;
+    }
+
     console.log('Selected City:', selectedCity);
     console.log('Selected Category:', selectedCategory);
     console.log('Selected Start Date:', startDate);
     console.log('Selected End Date:', endDate);
     console.log('Selected Brand:', selectedBrand);
 
-    // Reset the form
     setSelectedCity('');
     setSelectedCategory('');
     setSelectedBrand('');
     setShowSubmitButton(false);
 
-    // Navigate to the "Cradles" page
     navigate('/Cradles', {
       state: {
         selectedCity,
@@ -133,7 +138,8 @@ const SearchBar = () => {
         <DatePicker
           className="datePicker"
           selected={startDate}
-          onChange={date => { setStartDate(date); localStorage.setItem('startDate', date); }}
+          onChange={date => setStartDate(date)}
+          placeholderText="Start Date"
         />
         <FormHelperText className="startDate">Start Date</FormHelperText>
       </FormControl>
@@ -142,7 +148,8 @@ const SearchBar = () => {
         <DatePicker
           className="datePicker"
           selected={endDate}
-          onChange={date => { setEndDate(date); localStorage.setItem('endDate', date); }}
+          onChange={date => setEndDate(date)}
+          placeholderText="End Date"
         />
         <FormHelperText className="endDate">End Date</FormHelperText>
       </FormControl>

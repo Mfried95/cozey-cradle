@@ -32,8 +32,10 @@ const CheckoutForm = (props) => {
     if (paymentMethod) {
       // console.log("success");
       const bookings = [];
+      const quantities = [];
       myBookings.forEach((booking) => {
         bookings.push(booking._id);
+        quantities.push(booking.quantity);
       });
       try {
         console.log("bookings", myBookings);
@@ -41,6 +43,8 @@ const CheckoutForm = (props) => {
           productID: bookings[0],
           productName: myBookings[0].name,
           price: myBookings[0].price,
+          productID: bookings,
+          productQuantities: quantities,
           status: true,
           startDate: startDate,
           endDate: endDate,

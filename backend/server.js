@@ -81,6 +81,27 @@ app.get("/bookings", async (req, res) => {
   }
 });
 
+app.get("/bookings/:id", async (req, res) => {
+  try {
+    const database = client.db("cozeycradle");
+    const bookings = database.collection("bookings");
+
+    const bookingId = req.params.id; // Get the booking ID from the route parameter
+
+    const booking = await bookings.findOne({ _id: new ObjectId(bookingId) }); // Retrieve the booking by ID
+
+    if (booking) {
+      res.json(booking); // Return the booking as JSON response
+    } else {
+      res.status(404).json({ error: "Booking not found by id" }); // Booking not found in the database
+    }
+  } catch (error) {
+    console.error("Failed to fetch booking from the database:", error);
+    res.status(500).json({ error: "Failed to fetch booking from the database" });
+  }
+});
+
+
 // post new booking 
 app.post("/bookings", async (req, res) => {
   console.log("REQUEST BODY", req.body);
@@ -92,6 +113,7 @@ app.post("/bookings", async (req, res) => {
 
     const newBooking = {
       productID,
+      productQuantities,
       status,
       startDate,
       endDate,
