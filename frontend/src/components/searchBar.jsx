@@ -51,7 +51,7 @@ const SearchBar = () => {
 
     console.log('startDate:', startDate, 'endDate:', endDate);
     console.log("toast", toast)
-    if (!startDate && !endDate) {
+    if (!startDate || !endDate) {
       toast.error('Please select both start and end dates.');
       return;
     }

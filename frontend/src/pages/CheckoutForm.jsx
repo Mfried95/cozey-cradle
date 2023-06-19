@@ -40,14 +40,11 @@ const CheckoutForm = (props) => {
       try {
         console.log("bookings", myBookings);
         const response = await axios.post("http://localhost:3000/bookings", {
-          productID: bookings[0],
-          productName: myBookings[0].name,
-          price: myBookings[0].price,
+          productID: bookings,
           productQuantities: quantities,
           status: true,
           startDate: startDate,
-          endDate: endDate,
-          numberOfDays: moment(endDate).diff(moment(startDate), 'days'),
+          endDate: endDate
         });
         console.log(response);
         if (response.data.success) {
@@ -56,8 +53,8 @@ const CheckoutForm = (props) => {
             productImage: myBookings[0].image,
             productQuantities: quantities,
             orderDate: moment().format('YYYY-MM-DD'),
-            productName: myBookings[0].name,
-            price: myBookings[0].price,
+            productName: myBookings.name,
+            price: myBookings.price,
             numberOfDays: moment(endDate).diff(moment(startDate), 'days'),
             totalPrice: myBookings[0].price * moment(endDate).diff(moment(startDate), 'days')
           });

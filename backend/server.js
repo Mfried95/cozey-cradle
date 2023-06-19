@@ -104,40 +104,28 @@ app.get("/bookings/:id", async (req, res) => {
 
 // post new booking 
 app.post("/bookings", async (req, res) => {
-  console.log("REQUEST BODY", req.body);
   try {
     const database = client.db("cozeycradle");
     const bookings = database.collection("bookings");
-    const products = database.collection("products");
-    const { productID, status, startDate, endDate, productName, price } = req.body; // Get the booking data from the request body
+
+    const { productID, productQuantities, status, startDate, endDate } = req.body; // Get the booking data from the request body
 
     const newBooking = {
       productID,
       productQuantities,
       status,
       startDate,
-      endDate,
-      productName,
-      price
+      endDate
     };
 
     const result = await bookings.insertOne(newBooking); // Insert the new booking into the collection
-    const allOrders = await bookings.find().toArray();
-    // const product = await products.findOne({ _id: new ObjectId(productID) }); // Find the product by ID
+
     console.log(result);
 
     if (result.acknowledged) {
-      res.status(201).json({
-        success: true,
-        message: 'Created new booking',
-        data : {
-          allOrders: allOrders,
-          // product: product,
-
-        }
-      }); // Return the created booking as JSON response
+      res.status(201).json('Created new booking'); // Return the created booking as JSON response
     } else {
-      res.status(400).json({ error: "Failed to create booking" }); // Failed to create the booking
+      res.status(500).json({ error: "Failed to create booking" }); // Failed to create the booking
     }
   } catch (error) {
     console.error("Failed to create booking:", error);
