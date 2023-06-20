@@ -8,3 +8,8 @@
   /* font-family: 'Roboto', sans-serif; */
   font-weight: 400;
 }
+
+
+.cradle-image img:hover {
+  opacity: 0.5;
+}

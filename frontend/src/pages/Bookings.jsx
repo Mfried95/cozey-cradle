@@ -59,8 +59,8 @@ const product = myBookings.map((booking, index) => {
             <tr key={index}>
               <td>
                 <Link to={`/product/${booking._id}`}>
-                  <div className="image-container">
-                    <img src={booking.image} alt={booking.name} style={{ width: '100px' }} />
+                  <div className="image-container cradle-image">
+                    <img  src={booking.image} alt={booking.name} style={{ width: '100px' }} />
                   </div>
                 </Link>
                 <IconButton aria-label="delete" onClick={() => removeBooking(booking._id)}>

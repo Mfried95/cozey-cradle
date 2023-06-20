@@ -200,7 +200,7 @@ function Cradles(props) {
             key={cradle._id}
             className="product-card"
           >
-            <div>
+            <div className='cradle-image'>
               <Link to={`/product/${cradle._id}`}>
                 <img src={cradle.image} alt="" />
               </Link>
