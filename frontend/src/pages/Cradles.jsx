@@ -33,6 +33,9 @@ function Cradles(props) {
     theme: "light",
   });
 
+  localStorage.setItem('startDate', startDate);
+    localStorage.setItem('endDate', endDate);
+
 
   useEffect(() => {
     fetch('http://localhost:3000/api/products')
@@ -91,10 +94,12 @@ function Cradles(props) {
 
   useEffect(() => {
     if (location.state) {
-      const { selectedCity, selectedCategory, selectedRentDuration, selectedBrand } = location.state;
+      const { selectedCity, selectedCategory, startDate, endDate, selectedBrand } = location.state;
       setSearchBrand(selectedBrand);
       setSearchCity(selectedCity);
       setSearchCategory(selectedCategory);
+      setStartDate(startDate);
+      setEndDate(endDate);
     }
   }, [location.state]);
 
@@ -190,7 +195,9 @@ function Cradles(props) {
             <span> From ${cradle.price} / day</span>
             <h3>{cradle.name}</h3>
             <span className='price'> From ${cradle.price} / day</span>
-            <Button variant="outlined" sx={{
+            <Button variant="outlined" 
+            disabled={startDate === null || endDate === null}
+            sx={{
               color: "black",
               backgroundColor: "rgb(186, 148, 222)",
               padding: "8px",
