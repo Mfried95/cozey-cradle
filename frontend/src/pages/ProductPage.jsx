@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/productpage.css'
 
 function ProductPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
@@ -22,14 +23,17 @@ function ProductPage() {
   return (
     <div className='product-page-container'>
       <div className="product-details">
-      <h2>Product Details</h2>
-      {console.log(product)}
-      <img src={product.image} alt="" />
-      <h3>{product.brand}</h3>
-      <span>Avalible in {product.city}</span>
-      <p>Price: ${product.price}</p>
-      <p>{product.description}</p>
-      {/* Display other product information */}
+        {console.log(product)}
+        <div className="product-detail-image"><img src={product.image} alt="" /></div>
+        <div className='product-detail-info'>
+          <h2>Product Details</h2>
+          <h3>{product.brand}</h3>
+          <span>Available in {product.city}</span>
+          <p>Price: ${product.price}</p>
+          <p>{product.description}</p>
+          <button className='product-detail-button' onClick={() => navigate("/cradles")}>Go Back To The Other Cradles</button>
+        </div>
+        {/* Display other product information */}
       </div>
     </div>
   );
