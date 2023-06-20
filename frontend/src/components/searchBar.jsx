@@ -49,7 +49,9 @@ const SearchBar = () => {
   const handleFormSubmit = event => {
     event.preventDefault();
 
-    if (!startDate && !endDate) {
+    console.log('startDate:', startDate, 'endDate:', endDate);
+    console.log("toast", toast)
+    if (!startDate || !endDate) {
       toast.error('Please select both start and end dates.');
       return;
     }
@@ -64,6 +66,9 @@ const SearchBar = () => {
     setSelectedCategory('');
     setSelectedBrand('');
     setShowSubmitButton(false);
+
+    localStorage.setItem('startDate', startDate);
+    localStorage.setItem('endDate', endDate);
 
     navigate('/Cradles', {
       state: {

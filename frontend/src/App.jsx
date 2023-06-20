@@ -23,8 +23,10 @@ const App = () => {
 
   const [myBookings, setMyBookings] = useState([]);
   const [displayCheckout, setCheckout] = useState(false);
-
+  const [bookingDetails, setBookingDetails] = useState({});//new state for the booking details
   const [message, setMessage] = useState('');
+  const [orderHistory, setOrderHistory] = useState([]);//new state for the order history
+  const [orderProduct, setOrderProduct] = useState({});//new state for the order history
 
   const handleBookings = function(cradle) {
     // check if cardle already in the list
@@ -47,10 +49,25 @@ const App = () => {
     setMyBookings(myBookings.filter(booking => { return booking._id !== id; }));
   };
 
-  const handleCheckout = function(state) {
+  const handleCheckout = function (state) {
     setCheckout(state);
   };
 
+  const handleBookingDetails = function (details) {
+    setBookingDetails(details);
+  };
+
+  const handleOrderHistory = function (history) {
+    console.log("call handleOrderHistory")
+    // setOrderHistory(prevHistory => [...prevHistory, history]);
+    setOrderHistory(history);
+    console.log("orderHistory", history)
+  };
+
+  const handleOrderProduct = function (product) {
+    // setOrderProduct(prevProduct => [...prevProduct, product]);
+    setOrderProduct(product);
+  }; 
 
   return (
 
@@ -63,11 +80,11 @@ const App = () => {
           <Route path="cradles" element={<Cradles handleBookings={handleBookings} />} />
           <Route path="product/:id" element={<ProductPage />} /> {/* New route for the product page */}
           <Route path="bookings" element={<Bookings myBookings={myBookings} removeBooking={removeBooking} handleCheckout={handleCheckout} setMessage={setMessage} />} />
-          <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} />} /> {/* route for the confirmed bookings page */}
+          <Route path="booking/confirmed" element={<BookingConfirmed myBookings={myBookings} message={message} setMessage={setMessage} orderProduct={orderProduct} />} /> {/* route for the confirmed bookings page */}
           <Route path="/search" element={<SearchOrder/>} />
         </Routes>
       </div>
-      {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} message={message} setMessage={setMessage} myBookings={myBookings} />}
+      {displayCheckout && <CheckoutForm handleCheckout={handleCheckout} message={message} setMessage={setMessage} myBookings={myBookings} handleOrderHistory={handleOrderHistory} handleOrderProduct={handleOrderProduct} setMyBookings={setMyBookings} />}
 
     </Elements>
   );
