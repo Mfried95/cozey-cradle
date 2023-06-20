@@ -1,0 +1,11 @@
+.confirmation-container {
+  padding: 10em;
+}
+
+.confirm-header {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  margin: 2em;
+  /* background-color: rgb(186, 148, 222); */
+}

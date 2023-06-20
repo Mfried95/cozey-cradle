@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../styles/confirmed.css"
+
 
 const BookingConfirmed = (props) => {
   const { orderProduct } = props;
@@ -18,9 +20,11 @@ const BookingConfirmed = (props) => {
   return (
     <div className="confirmation-container">
       <h1>Order Confirmation</h1>
-
-      <h2>Booking Details</h2>
-      <h2>Order ID {orderProduct.bookingID}</h2>
+    
+    <div className="confirm-header">
+      <h2>Order ID  # {orderProduct.bookingID.slice(-5)}</h2>
+      <p>Your order has been confirmed. To check your order details please see the <Link>Search Order</Link> page to see your order details at a later time. </p>
+    </div>
       <table>
         <thead>
           <tr>
@@ -37,7 +41,7 @@ const BookingConfirmed = (props) => {
           {orderProduct.productResult.map((product, index) => {
             return (
               <tr key={index}>
-                <td>{product.productID}</td>
+                <td>{product.productID.slice(-6)}</td>
                 <td>
                   <img src={product.productImage} alt={product.productName} style={{ width: '100px' }} />
                 </td>
