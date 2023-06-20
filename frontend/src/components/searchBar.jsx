@@ -160,7 +160,7 @@ const SearchBar = () => {
       {showSubmitButton && (
         <Button variant="contained" 
         sx={{
-          color: "black",
+          color: "white",
           backgroundColor: "rgb(186, 148, 222)",
           width: "150px",
           height: '50px',
@@ -168,6 +168,7 @@ const SearchBar = () => {
           "&:hover": {
             backgroundColor: "white",
             border: "solid grey 1px",
+            color: "black",
           },
         }}
         onClick={handleFormSubmit}>

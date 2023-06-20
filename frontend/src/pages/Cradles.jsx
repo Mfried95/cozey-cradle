@@ -178,7 +178,7 @@ function Cradles(props) {
           <Button variant="contained" 
           onClick={handleFormSubmit}
           sx={{
-            color: "black",
+            color: "white",
             backgroundColor: "rgb(186, 148, 222)",
             padding: "13px",
             width: "150px",
@@ -186,6 +186,7 @@ function Cradles(props) {
             "&:hover": {
               backgroundColor: "white",
               border: "solid grey 1px",
+              color: 'black'
             },
           }}
           >
@@ -211,7 +212,7 @@ function Cradles(props) {
             <Button variant="outlined" 
             disabled={startDate === null || endDate === null}
             sx={{
-              color: "black",
+              color: "white",
               backgroundColor: "rgb(186, 148, 222)",
               padding: "8px",
               width: "150px",
@@ -219,6 +220,7 @@ function Cradles(props) {
               "&:hover": {
                 backgroundColor: "white",
                 border: "solid grey 1px",
+                color: "black",
               },
             }} onClick={() => { handleBookings(cradle); notify() }}>Book now!</Button>
           </div>

@@ -113,7 +113,7 @@ const SearchOrder = () => {
         <Button
           variant="outlined"
           sx={{
-            color: "black",
+            color: "white",
             backgroundColor: "rgb(186, 148, 222)",
             padding: "8px",
             width: "150px",
@@ -121,6 +121,7 @@ const SearchOrder = () => {
             "&:hover": {
               backgroundColor: "white",
               border: "solid grey 1px",
+              color: "black",
             },
           }}
           type="submit"

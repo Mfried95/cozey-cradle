@@ -83,8 +83,34 @@ const product = myBookings.map((booking, index) => {
       </table>
 
       <div className="button-container">
-        <Button variant="outlined" className="checkout-button" onClick={() => handleCheckout('true')} disabled={myBookings.length === 0}>Checkout</Button>
-        <Link to="/Cradles" ><Button variant="outlined">Back to Cradles</Button></Link>
+        <Button variant="outlined" 
+        sx={{
+          color: "white",
+          backgroundColor: "rgb(186, 148, 222)",
+          padding: "5px",
+          width: "150px",
+          border: "solid grey 1px",
+          "&:hover": {
+            backgroundColor: "white",
+            border: "solid grey 1px",
+            color: "black",
+          },
+        }}
+        className="checkout-button" onClick={() => handleCheckout('true')} disabled={myBookings.length === 0}>Checkout</Button>
+        <Link to="/Cradles" ><Button 
+        sx={{
+          color: "white",
+          backgroundColor: "rgb(186, 148, 222)",
+          padding: "5px",
+          width: "150px",
+          border: "solid grey 1px",
+          "&:hover": {
+            backgroundColor: "white",
+            border: "solid grey 1px",
+            color: "black",
+          },
+        }}
+        variant="outlined">Back to Cradles</Button></Link>
       </div>
 
     </div>
