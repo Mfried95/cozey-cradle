@@ -34,15 +34,53 @@ const SearchOrder = () => {
     if (foundBooking) {
       setMatchedBooking(foundBooking);
       setError("");
+      console.log(foundBooking);
 
-      try {
-        const response = await fetch(
-          `http://localhost:3000/api/products/${foundBooking.productID}`
-        );
-        const product = await response.json();
-        setProductData(product);
-      } catch (error) {
-        console.error("Failed to fetch product data:", error);
+      if (Array.isArray(foundBooking.productID)) {
+        console.log("Product IDs are an array:", foundBooking.productID);
+
+        try {
+          const productPromises = foundBooking.productID.map(
+            async (productId) => {
+              const response = await fetch(
+                `http://localhost:3000/api/products/${productId}`
+              );
+
+              if (!response.ok) {
+                throw new Error(
+                  `Failed to fetch product data for ID: ${productId}`
+                );
+              }
+
+              const product = await response.json();
+              return product;
+            }
+          );
+
+          const products = await Promise.all(productPromises);
+          console.log("Products:", products);
+          setProductData(products);
+        } catch (error) {
+          console.error("Failed to fetch product data:", error);
+        }
+      } else {
+        console.log("Product ID:", foundBooking.productID);
+
+        try {
+          const response = await fetch(
+            `http://localhost:3000/api/products/${foundBooking.productID}`
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch product data");
+          }
+
+          const product = await response.json();
+          console.log("Product:", product);
+          setProductData([product]);
+        } catch (error) {
+          console.error("Failed to fetch product data:", error);
+        }
       }
     } else {
       setMatchedBooking(null);
@@ -104,20 +142,21 @@ const SearchOrder = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  {productData && (
-                    <div>
-                      <Link to={`/product/${productData._id}`}>
-                        <img src={productData.image} alt="" />
-                      </Link>
-                    </div>
-                  )}
-                </td>
-                <td>{productData && productData.name}</td>
-                <td>{productData && productData.startDate}</td>
-                <td>{productData && productData.price}</td>
-              </tr>
+              {productData &&
+                productData.map((product) => (
+                  <tr key={product._id}>
+                    <td>
+                      <div>
+                        <Link to={`/product/${product._id}`}>
+                          <img src={product.image} alt="" />
+                        </Link>
+                      </div>
+                    </td>
+                    <td>{product.name}</td>
+                    <td>{product.startDate}</td>
+                    <td>{product.price}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
