@@ -157,7 +157,7 @@ function Cradles(props) {
         </TextField>
         <FormControl>
           <DatePicker
-            className="datePicker"
+            className="datePicker-cradles"
             selected={startDate}
             onChange={date => setStartDate(date)}
             placeholderText="Start Date"
@@ -167,7 +167,7 @@ function Cradles(props) {
 
         <FormControl>
           <DatePicker
-            className="datePicker"
+            className="datePicker-cradles"
             selected={endDate}
             onChange={date => setEndDate(date)}
             placeholderText="End Date"
@@ -176,7 +176,19 @@ function Cradles(props) {
         </FormControl>
 
           <Button variant="contained" 
-          onClick={handleFormSubmit}>
+          onClick={handleFormSubmit}
+          sx={{
+            color: "black",
+            backgroundColor: "rgb(186, 148, 222)",
+            padding: "13px",
+            width: "150px",
+            border: "solid grey 1px",
+            "&:hover": {
+              backgroundColor: "white",
+              border: "solid grey 1px",
+            },
+          }}
+          >
             Submit
           </Button>
       </div>

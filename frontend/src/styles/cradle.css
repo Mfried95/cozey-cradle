@@ -10,7 +10,16 @@
   margin-bottom: 1.5em;
 }
 
+.datePicker-cradles {
+  padding: 19px;
+  border: solid 1px rgb(196, 193, 193);
+  border-radius: 0.2rem;
+  margin-top: 1.7em;
+}
 
+.filter-cradles-bar button {
+  margin-top: 1.5em;
+}
 
 .filtered-cradles {
   display: flex;
