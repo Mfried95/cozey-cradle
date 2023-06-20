@@ -1,5 +1,19 @@
+.searchbar-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.searchbar-container button {
+  margin-bottom: 1.5em;
+}
+
 .datePicker {
   padding: 18px;
+  border: solid 1px rgb(196, 193, 193);
+  border-radius: 0.2rem;
 }
 
 .startDate {
@@ -10,3 +24,4 @@
 .endDate {
   padding-left: 50px;
 }
+

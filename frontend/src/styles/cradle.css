@@ -1,8 +1,16 @@
 .filter-cradles-bar {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  gap: 0.5em;
 }
+
+.filter-cradles-bar button {
+  margin-bottom: 1.5em;
+}
+
+
 
 .filtered-cradles {
   display: flex;

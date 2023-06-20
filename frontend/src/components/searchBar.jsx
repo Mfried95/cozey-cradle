@@ -82,7 +82,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
+    <div className='searchbar-container'>
       <FormControl>
         <InputLabel id="city-label">City</InputLabel>
         <Select
@@ -158,7 +158,19 @@ const SearchBar = () => {
       </FormControl>
 
       {showSubmitButton && (
-        <Button variant="contained" onClick={handleFormSubmit}>
+        <Button variant="contained" 
+        sx={{
+          color: "black",
+          backgroundColor: "rgb(186, 148, 222)",
+          width: "150px",
+          height: '50px',
+          border: "solid grey 1px",
+          "&:hover": {
+            backgroundColor: "white",
+            border: "solid grey 1px",
+          },
+        }}
+        onClick={handleFormSubmit}>
           Submit
         </Button>
       )}

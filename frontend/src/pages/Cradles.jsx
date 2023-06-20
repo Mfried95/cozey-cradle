@@ -175,7 +175,8 @@ function Cradles(props) {
           <FormHelperText className="endDate">End Date</FormHelperText>
         </FormControl>
 
-          <Button variant="contained" onClick={handleFormSubmit}>
+          <Button variant="contained" 
+          onClick={handleFormSubmit}>
             Submit
           </Button>
       </div>
