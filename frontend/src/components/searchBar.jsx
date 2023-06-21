@@ -21,7 +21,7 @@ const SearchBar = () => {
   const [showSubmitButton, setShowSubmitButton] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/products')
+    fetch('/api/products')
       .then(response => response.json())
       .then(data => {
         setCities([...new Set(data.map(product => product.city))]);

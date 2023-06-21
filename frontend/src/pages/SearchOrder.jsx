@@ -11,7 +11,7 @@ const SearchOrder = () => {
   const [productData, setProductData] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/bookings")
+    fetch("/bookings")
       .then((response) => response.json())
       .then((data) => {
         setBookings(data);
@@ -43,7 +43,7 @@ const SearchOrder = () => {
           const productPromises = foundBooking.productID.map(
             async (productId) => {
               const response = await fetch(
-                `http://localhost:3000/api/products/${productId}`
+                `/api/products/${productId}`
               );
 
               if (!response.ok) {
@@ -68,7 +68,7 @@ const SearchOrder = () => {
 
         try {
           const response = await fetch(
-            `http://localhost:3000/api/products/${foundBooking.productID}`
+            `/api/products/${foundBooking.productID}`
           );
 
           if (!response.ok) {
