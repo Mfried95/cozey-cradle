@@ -14,8 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 3000;
 
-const uri =
-  "mongodb+srv://cozeycradle:s2EpenbL4JpBBABN@cozeycradle.w07iyp9.mongodb.net/";
+const uri = process.env.MONGODB_URI;
+
 const client = new MongoClient(uri);
 
 const connectDb = async () => {
