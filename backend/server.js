@@ -1,5 +1,7 @@
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
+require('dotenv').config()
+console.log(process.env) 
 const cors = require("cors");
 const { find } = require("./models/Booking");
 
