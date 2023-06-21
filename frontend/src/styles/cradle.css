@@ -75,3 +75,10 @@
   padding: 8px;
   
 }
+
+.cradle-header h2 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 40px;
+  color: rgb(155, 125, 184);
+}

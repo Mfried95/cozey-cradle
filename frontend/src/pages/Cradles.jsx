@@ -33,8 +33,9 @@ function Cradles(props) {
     theme: "light",
   });
 
-  localStorage.setItem('startDate', startDate);
-    localStorage.setItem('endDate', endDate);
+
+  // localStorage.setItem('startDate', startDate);
+  //   localStorage.setItem('endDate', endDate);
 
 
   useEffect(() => {
@@ -106,15 +107,15 @@ function Cradles(props) {
   const handleFormSubmit = event => {
     event.preventDefault();
 
-    if (!startDate && !endDate) {
+    if (!startDate || !endDate) {
       toast.error('Please select both start and end dates.');
       return;
     }
   };
 
   return (
-    <div>
-      <h2>Our cradles</h2>
+    <div className='cradle-header'>
+      <h2>Our Cradles</h2>
       <div className="filter-cradles-bar">
         <TextField
           select
@@ -159,7 +160,10 @@ function Cradles(props) {
           <DatePicker
             className="datePicker-cradles"
             selected={startDate}
-            onChange={date => setStartDate(date)}
+            onChange={date => {
+              setStartDate(date)
+              localStorage.setItem('startDate', date);
+            }}
             placeholderText="Start Date"
           />
           <FormHelperText className="startDate">Start Date</FormHelperText>
@@ -169,7 +173,10 @@ function Cradles(props) {
           <DatePicker
             className="datePicker-cradles"
             selected={endDate}
-            onChange={date => setEndDate(date)}
+            onChange={date => {
+              setEndDate(date)
+              localStorage.setItem('endDate', date);
+            }}
             placeholderText="End Date"
           />
           <FormHelperText className="endDate">End Date</FormHelperText>
