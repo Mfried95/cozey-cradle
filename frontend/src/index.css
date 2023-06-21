@@ -10,6 +10,14 @@
 }
 
 
+body {
+  background-image: url('/violet.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+
 .cradle-image img:hover {
   opacity: 0.5;
 }

@@ -118,7 +118,7 @@ function Cradles(props) {
       <div className="filter-cradles-bar">
         <TextField
           select
-          sx={{ width: '150px' }}
+          sx={{ width: '150px', backgroundColor: "white" }}
           label="Brand"
           value={searchBrand}
           onChange={handleSearchBrandChange}
@@ -130,7 +130,7 @@ function Cradles(props) {
           ))}
         </TextField>
         <TextField
-          sx={{ width: '150px' }}
+          sx={{ width: '150px', backgroundColor: "white" }}
           select
           label="Search by city"
           value={searchCity}
@@ -144,7 +144,7 @@ function Cradles(props) {
         </TextField>
         <TextField
           select
-          sx={{ width: '150px' }}
+          sx={{ width: '150px', backgroundColor: "white" }}
           label="Category"
           value={searchCategory}
           onChange={handleSearchCategoryChange}

@@ -83,7 +83,7 @@ const SearchBar = () => {
 
   return (
     <div className='searchbar-container'>
-      <FormControl>
+      <FormControl style={{ backgroundColor: "white", width: '120px', marginBottom: '1.4em'  }}>
         <InputLabel id="city-label">City</InputLabel>
         <Select
           labelId="city-label"
@@ -98,10 +98,9 @@ const SearchBar = () => {
             </MenuItem>
           ))}
         </Select>
-        <FormHelperText>Select a city</FormHelperText>
       </FormControl>
 
-      <FormControl>
+      <FormControl style={{ backgroundColor: "white", width: '120px', marginBottom: '1.4em'  }}>
         <InputLabel id="category-label">Category</InputLabel>
         <Select
           labelId="category-label"
@@ -116,10 +115,9 @@ const SearchBar = () => {
             </MenuItem>
           ))}
         </Select>
-        <FormHelperText>Select a category</FormHelperText>
       </FormControl>
 
-      <FormControl>
+      <FormControl style={{ backgroundColor: "white", width: '120px', marginBottom: '1.4em'  }}>
         <InputLabel id="brand-label">Brand</InputLabel>
         <Select
           labelId="brand-label"
@@ -134,7 +132,6 @@ const SearchBar = () => {
             </MenuItem>
           ))}
         </Select>
-        <FormHelperText>Select a brand</FormHelperText>
       </FormControl>
 
       <FormControl>
