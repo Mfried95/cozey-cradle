@@ -22,8 +22,8 @@ const BookingConfirmed = (props) => {
       <h1>Order Confirmation</h1>
     
     <div className="confirm-header">
-      <h2>Order ID  # {orderProduct.bookingID.slice(-5)}</h2>
-      <p>Your order has been confirmed. To check your order details please see the <Link>Search Order</Link> page to see your order details at a later time. </p>
+      <h2>Search ID  # {orderProduct.bookingID.slice(-5)}</h2>
+      <p>Your order has been confirmed! To check your order details please take the Search ID to the <Link to='/search'>Search Order</Link> page to see your order details. </p>
     </div>
       <table>
         <thead>

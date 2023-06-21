@@ -9,3 +9,7 @@
   margin: 2em;
   /* background-color: rgb(186, 148, 222); */
 }
+
+.confirm-header p {
+  margin-top: 1em;
+}
