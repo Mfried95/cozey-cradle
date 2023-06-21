@@ -39,7 +39,7 @@ const CheckoutForm = (props) => {
       });
       try {
         console.log("bookings", myBookings);
-        const response = await axios.post("http://localhost:3000/bookings", {
+        const response = await axios.post("/bookings", {
           productID: bookings,
           productQuantities: quantities,
           status: true,
