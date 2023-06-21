@@ -9,6 +9,7 @@ export default defineConfig({
   plugins: [react()],
   server: Object.assign(
     {
+      host: true,
       proxy: {
         "/bookings": process.env.backend || "http://localhost:3000",
         "/api": process.env.backend || "http://localhost:3000",
