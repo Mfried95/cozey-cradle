@@ -118,7 +118,7 @@ function Cradles(props) {
       <div className="filter-cradles-bar">
         <TextField
           select
-          sx={{ width: '150px' }}
+          sx={{ width: '150px', backgroundColor: "white" }}
           label="Brand"
           value={searchBrand}
           onChange={handleSearchBrandChange}
@@ -130,7 +130,7 @@ function Cradles(props) {
           ))}
         </TextField>
         <TextField
-          sx={{ width: '150px' }}
+          sx={{ width: '150px', backgroundColor: "white" }}
           select
           label="Search by city"
           value={searchCity}
@@ -144,7 +144,7 @@ function Cradles(props) {
         </TextField>
         <TextField
           select
-          sx={{ width: '150px' }}
+          sx={{ width: '150px', backgroundColor: "white" }}
           label="Category"
           value={searchCategory}
           onChange={handleSearchCategoryChange}
@@ -157,7 +157,7 @@ function Cradles(props) {
         </TextField>
         <FormControl>
           <DatePicker
-            className="datePicker"
+            className="datePicker-cradles"
             selected={startDate}
             onChange={date => setStartDate(date)}
             placeholderText="Start Date"
@@ -167,7 +167,7 @@ function Cradles(props) {
 
         <FormControl>
           <DatePicker
-            className="datePicker"
+            className="datePicker-cradles"
             selected={endDate}
             onChange={date => setEndDate(date)}
             placeholderText="End Date"
@@ -175,7 +175,21 @@ function Cradles(props) {
           <FormHelperText className="endDate">End Date</FormHelperText>
         </FormControl>
 
-          <Button variant="contained" onClick={handleFormSubmit}>
+          <Button variant="contained" 
+          onClick={handleFormSubmit}
+          sx={{
+            color: "white",
+            backgroundColor: "rgb(186, 148, 222)",
+            padding: "13px",
+            width: "150px",
+            border: "solid grey 1px",
+            "&:hover": {
+              backgroundColor: "white",
+              border: "solid grey 1px",
+              color: 'black'
+            },
+          }}
+          >
             Submit
           </Button>
       </div>
@@ -186,7 +200,7 @@ function Cradles(props) {
             key={cradle._id}
             className="product-card"
           >
-            <div>
+            <div className='cradle-image'>
               <Link to={`/product/${cradle._id}`}>
                 <img src={cradle.image} alt="" />
               </Link>
@@ -198,7 +212,7 @@ function Cradles(props) {
             <Button variant="outlined" 
             disabled={startDate === null || endDate === null}
             sx={{
-              color: "black",
+              color: "white",
               backgroundColor: "rgb(186, 148, 222)",
               padding: "8px",
               width: "150px",
@@ -206,6 +220,7 @@ function Cradles(props) {
               "&:hover": {
                 backgroundColor: "white",
                 border: "solid grey 1px",
+                color: "black",
               },
             }} onClick={() => { handleBookings(cradle); notify() }}>Book now!</Button>
           </div>

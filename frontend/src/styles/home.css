@@ -58,6 +58,27 @@ body {
   color: rgb(155, 125, 184);
 }
 
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 20px;
+  color: rgb(171, 161, 181);
+  border-radius: 10px;
+  text-align: center;
+  word-wrap: break-word;
+  height: auto;
+  max-width: 300px;
+}
+
+.step h2 {
+  color: rgb(155, 125, 184);
+}
+
 
 .brands {
   display: flex;
@@ -73,3 +94,4 @@ body {
   margin-left: 10px;
   margin-right: 10px;
 }
+>>>>>>> a882bcc (styling home page)

@@ -82,8 +82,8 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
-      <FormControl>
+    <div className='searchbar-container'>
+      <FormControl style={{ backgroundColor: "white", width: '120px', marginBottom: '1.4em'  }}>
         <InputLabel id="city-label">City</InputLabel>
         <Select
           labelId="city-label"
@@ -98,10 +98,9 @@ const SearchBar = () => {
             </MenuItem>
           ))}
         </Select>
-        <FormHelperText>Select a city</FormHelperText>
       </FormControl>
 
-      <FormControl>
+      <FormControl style={{ backgroundColor: "white", width: '120px', marginBottom: '1.4em'  }}>
         <InputLabel id="category-label">Category</InputLabel>
         <Select
           labelId="category-label"
@@ -116,10 +115,9 @@ const SearchBar = () => {
             </MenuItem>
           ))}
         </Select>
-        <FormHelperText>Select a category</FormHelperText>
       </FormControl>
 
-      <FormControl>
+      <FormControl style={{ backgroundColor: "white", width: '120px', marginBottom: '1.4em'  }}>
         <InputLabel id="brand-label">Brand</InputLabel>
         <Select
           labelId="brand-label"
@@ -134,7 +132,6 @@ const SearchBar = () => {
             </MenuItem>
           ))}
         </Select>
-        <FormHelperText>Select a brand</FormHelperText>
       </FormControl>
 
       <FormControl>
@@ -158,7 +155,20 @@ const SearchBar = () => {
       </FormControl>
 
       {showSubmitButton && (
-        <Button variant="contained" onClick={handleFormSubmit}>
+        <Button variant="contained" 
+        sx={{
+          color: "white",
+          backgroundColor: "rgb(186, 148, 222)",
+          width: "150px",
+          height: '50px',
+          border: "solid grey 1px",
+          "&:hover": {
+            backgroundColor: "white",
+            border: "solid grey 1px",
+            color: "black",
+          },
+        }}
+        onClick={handleFormSubmit}>
           Submit
         </Button>
       )}
