@@ -21,3 +21,8 @@ body {
 .cradle-image img:hover {
   opacity: 0.5;
 }
+
+
+table td{
+  text-align: center;
+}

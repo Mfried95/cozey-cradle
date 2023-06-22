@@ -213,7 +213,6 @@ function Cradles(props) {
               </Link>
             </div>
             <h3>{cradle.brand}</h3>
-            <span> From ${cradle.price} / day</span>
             <h3>{cradle.name}</h3>
             <span className='price'> From ${cradle.price} / day</span>
             <Button variant="outlined" 
