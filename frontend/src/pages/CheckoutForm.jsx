@@ -21,7 +21,7 @@ const CheckoutForm = (props) => {
     if (!stripe || !elements) {
       return;
     }
-
+    
     const cardElement = elements.getElement(CardElement);
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({

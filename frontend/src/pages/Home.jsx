@@ -6,12 +6,12 @@ import '../styles/home.css';
 
 const Home = () => {
   return (
-    <div>
+    <div className='home-page'>
       <div className="home-container">
         <h1>Search for a cradle</h1>
         <SearchBar />
       </div>
-      <section >
+      <section className='how-it-works' >
         <h1>How it Works</h1>
         <div className='steps'>
           <div className='step'>
@@ -31,6 +31,7 @@ const Home = () => {
       <section>
         <h1>Featured Brands</h1>
         <div className='brands'>
+          
           <img src="britax.png" alt="britax" />
           <img src="graco.png" alt="graco" />
           <img src="uppa.png" alt="uppa" />

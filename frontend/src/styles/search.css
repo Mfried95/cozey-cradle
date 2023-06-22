@@ -42,3 +42,13 @@ form h2 {
   color: red;
   margin: auto;
 }
+
+
+table{
+  background-color: white;
+}
+
+
+.form-search {
+  background-size: cover;
+}

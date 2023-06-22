@@ -15,6 +15,7 @@
 .nav-links {
   display: flex;
   gap: 2em;
+  font-size: 1.1em;
 }
 
 .nav-links a {
@@ -25,6 +26,7 @@
 
 .nav-links a:hover {
   color: black;
+  border-bottom: black 1px solid;
 }
 
 .cart {

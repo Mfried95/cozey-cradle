@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import "../styles/search.css";
 
 const SearchOrder = () => {
@@ -9,6 +10,8 @@ const SearchOrder = () => {
   const [matchedBooking, setMatchedBooking] = useState(null);
   const [error, setError] = useState("");
   const [productData, setProductData] = useState(null);
+  
+
 
   useEffect(() => {
     fetch("/bookings")
@@ -100,7 +103,7 @@ const SearchOrder = () => {
   };
 
   return (
-    <form onSubmit={handleSearch}>
+    <form onSubmit={handleSearch} className="form-search">
       <div className="search-id">
         <input
           type="text"
@@ -131,39 +134,45 @@ const SearchOrder = () => {
       </div>
       <p className="error-message">{error}</p>
       {matchedBooking ? (
-        <div className="bookings-container">
-          <h2>Order details for ID: {matchedBooking._id.slice(-4)}</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Product Image</th>
-                <th>Product Name</th>
-                <th>Product Duration</th>
-                <th>Total Price</th>
+  <div className="bookings-container">
+    <h2>Order details for ID: {matchedBooking._id.slice(-4)}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Image</th>
+          <th>Product Name</th>
+          <th>Product Duration</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {productData &&
+          productData.map((product) => {
+            const startDate = moment(matchedBooking.startDate);
+            const endDate = moment(matchedBooking.endDate);
+            const duration = endDate.diff(startDate, 'days');
+
+            return (
+              <tr key={product._id}>
+                <td>
+                  <div>
+                    <Link to={`/product/${product._id}`}>
+                      <img src={product.image} alt="" />
+                    </Link>
+                  </div>
+                </td>
+                <td>{product.name}</td>
+                <td>{duration} days</td> {/* Display the duration */}
+                <td>{product.price}</td>
               </tr>
-            </thead>
-            <tbody>
-              {productData &&
-                productData.map((product) => (
-                  <tr key={product._id}>
-                    <td>
-                      <div>
-                        <Link to={`/product/${product._id}`}>
-                          <img src={product.image} alt="" />
-                        </Link>
-                      </div>
-                    </td>
-                    <td>{product.name}</td>
-                    <td>{product.startDate}</td>
-                    <td>{product.price}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <p></p>
-      )}
+            );
+          })}
+      </tbody>
+    </table>
+  </div>
+) : (
+  <p></p>
+)}
     </form>
   );
 };
