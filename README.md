@@ -15,6 +15,7 @@ Cozy Cradle is a baby car seat rental service that allows users to rent car seat
 ## Technologies Used
 
 - MERN stack (MongoDB, Express, React, Node.js)
+- Stripe
 - Material-UI (MUI v5)
 - React-Toastify
 - DotEnv
