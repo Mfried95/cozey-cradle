@@ -29,10 +29,10 @@ _Home page screenshot._
 ![Cradles](./docs/Cradles.png)
 _Car seats page screenshot._
 
-![Bookings](./docs/Bookings.png)
+![Bookings](./docs/bookings.png)
 _Order page screenshot._
 
-![Confirmation page](./docs/Confirmed.png)
+![Confirmation page](./docs/confirmed.png)
 _Confirmation page screenshot._
 
 
