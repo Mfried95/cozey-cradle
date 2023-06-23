@@ -1,4 +1,4 @@
-# [Cozey Cradle](https://balmy-afternoon-production.up.railway.app/)
+# [Cozey Cradle](https://balmy-afternoon-production.up.railway.app/) - Click to view project
 
 Cozy Cradle is a baby car seat rental service that allows users to rent car seats for their infants. This web application is built using the MERN stack (MongoDB, Express, React, Node.js). Users can browse and filter through a variety of car seats, select the desired rental date and city, add items to the cart, and complete the checkout process using Stripe for payment. Each order is assigned a unique 5-digit confirmation code for easy reference.
 
