@@ -7,7 +7,6 @@ import moment from 'moment';
 
 const CheckoutForm = (props) => {
   const { myBookings, setMessage, handleOrderProduct, handleCheckout, setMyBookings } = props;
-  console.log(myBookings)
 
   const stripe = useStripe();
   const elements = useElements();
@@ -30,7 +29,6 @@ const CheckoutForm = (props) => {
     });
 
     if (paymentMethod) {
-      // console.log("success");
       const bookings = [];
       const quantities = [];
       myBookings.forEach((booking) => {
@@ -38,7 +36,6 @@ const CheckoutForm = (props) => {
         quantities.push(booking.quantity);
       });
       try {
-        console.log("bookings", myBookings);
         const response = await axios.post("/bookings", {
           productID: bookings,
           productQuantities: quantities,
@@ -46,32 +43,16 @@ const CheckoutForm = (props) => {
           startDate: startDate,
           endDate: endDate
         });
-        console.log(response);
         if (response.data.success) {
-          console.log("Successful Payment");
           handleOrderProduct(
-            // productImage: myBookings[0].image,
-            // productQuantities: quantities,
-            // orderDate: moment().format('YYYY-MM-DD'),
-            // productName: myBookings.name,
-            // price: myBookings.price,
-            // numberOfDays: moment(endDate).diff(moment(startDate), 'days'),
-            // totalPrice: myBookings[0].price * moment(endDate).diff(moment(startDate), 'days')
             response.data.data
           );
-          // handleOrderHistory(response.data.data.allOrders);
-          console.log("response.data.allOrders", response.data.message);
-          console.log("response.data", response.data);
           setMyBookings([]);
           setMessage('the booking was confirmed');
-          // localStorage.removeItem('startDate');
-          // localStorage.removeItem('endDate');
           handleCheckout(false);
           navigate('/booking/confirmed');
-          // window.location.href='/booking/confirmed';
         }
        else {
-          console.log("Error", response.data.error);
           setMessage('the booking is invalid');
         }
       } catch (error) {
@@ -79,7 +60,6 @@ const CheckoutForm = (props) => {
       }
     } else {
       setMessage('Invalid payment');
-      console.log(error.message);
       setMessage('the booking is invalid');
     }
 

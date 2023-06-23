@@ -23,7 +23,6 @@ function ProductPage() {
   return (
     <div className='product-page-container'>
       <div className="product-details">
-        {console.log(product)}
         <div className="product-detail-image"><img src={product.image} alt="" /></div>
         <div className='product-detail-info'>
           <h2>Product Details</h2>

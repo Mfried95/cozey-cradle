@@ -7,16 +7,6 @@ const BookingConfirmed = (props) => {
   const { orderProduct } = props;
   console.log(orderProduct);
 
-  // const orderHistory = orderProduct.map((product) => {
-  //   return {
-  //     orderDate: new Date().toLocaleDateString(),
-  //     productName: product.name,
-  //     price: product.price,
-  //     numberOfDays: product.numberOfDays,
-  //     totalPrice: product.totalPrice,
-  //   };
-  // });
-
   return (
     <div className="confirmation-container">
       <h1>Order Confirmation</h1>

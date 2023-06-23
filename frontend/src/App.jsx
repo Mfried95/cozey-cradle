@@ -58,14 +58,10 @@ const App = () => {
   };
 
   const handleOrderHistory = function (history) {
-    console.log("call handleOrderHistory")
-    // setOrderHistory(prevHistory => [...prevHistory, history]);
     setOrderHistory(history);
-    console.log("orderHistory", history)
   };
 
   const handleOrderProduct = function (product) {
-    // setOrderProduct(prevProduct => [...prevProduct, product]);
     setOrderProduct(product);
   }; 
 

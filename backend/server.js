@@ -1,7 +1,6 @@
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
 require('dotenv').config()
-console.log(process.env) 
 const cors = require("cors");
 const { find } = require("./models/Booking");
 
@@ -49,8 +48,6 @@ app.get(`/api/products/:id`, async (req, res) => {
     const productId = req.params.id; // Get the product ID from the request parameters
 
     const product = await products.findOne({ _id: new ObjectId(productId) }); // Find the product by ID
-
-    console.log("PRODUCTID", productId, product);
 
     if (product) {
       res.json(product); // Return the product as JSON response
@@ -123,7 +120,6 @@ app.post("/bookings", async (req, res) => {
 
     const result = await bookings.insertOne(newBooking); // Insert the new booking into the collection
 
-    console.log(result);
     const productResult = [];
     for (let i = 0; i < productID.length; i++) {
       const _Product = await database.collection("products").findOne({ _id: new ObjectId(productID[i]) });

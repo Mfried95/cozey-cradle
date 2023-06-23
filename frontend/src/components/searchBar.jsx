@@ -49,18 +49,10 @@ const SearchBar = () => {
   const handleFormSubmit = event => {
     event.preventDefault();
 
-    console.log('startDate:', startDate, 'endDate:', endDate);
-    console.log("toast", toast)
     if (!startDate || !endDate) {
       toast.error('Please select both start and end dates.');
       return;
     }
-
-    console.log('Selected City:', selectedCity);
-    console.log('Selected Category:', selectedCategory);
-    console.log('Selected Start Date:', startDate);
-    console.log('Selected End Date:', endDate);
-    console.log('Selected Brand:', selectedBrand);
 
     setSelectedCity('');
     setSelectedCategory('');

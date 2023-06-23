@@ -37,7 +37,6 @@ const SearchOrder = () => {
     if (foundBooking) {
       setMatchedBooking(foundBooking);
       setError("");
-      console.log(foundBooking);
 
       if (Array.isArray(foundBooking.productID)) {
         console.log("Product IDs are an array:", foundBooking.productID);
@@ -61,7 +60,6 @@ const SearchOrder = () => {
           );
 
           const products = await Promise.all(productPromises);
-          console.log("Products:", products);
           setProductData(products);
         } catch (error) {
           console.error("Failed to fetch product data:", error);
@@ -79,7 +77,6 @@ const SearchOrder = () => {
           }
 
           const product = await response.json();
-          console.log("Product:", product);
           setProductData([product]);
         } catch (error) {
           console.error("Failed to fetch product data:", error);
