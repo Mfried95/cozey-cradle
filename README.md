@@ -1,41 +1,40 @@
-# Cozey Cradle
+# Cozy Cradle   [View Project](https://balmy-afternoon-production.up.railway.app/)
 
-Cozy Cradle is a baby car seat rental service. You can choose what type car seat you want as well as the specific date you would like to rent for, and for waht city. Built using MERN stack.
+Cozy Cradle is a baby car seat rental service that allows users to rent car seats for their infants. This web application is built using the MERN stack (MongoDB, Express, React, Node.js). Users can browse and filter through a variety of car seats, select the desired rental date and city, add items to the cart, and complete the checkout process using Stripe for payment. Each order is assigned a unique 5-digit confirmation code for easy reference.
 
 ## Features
 
-- Filter throught our invatetory of car seats
-- Date selection
-- View product details
-- Add to cart
-- Checkout with Stripe
-- Givin 5 digit conformation code
-- Search your order with confirmation code
+- Browse and filter the inventory of car seats
+- Select the desired rental date
+- View detailed information about each product
+- Add items to the cart
+- Checkout using Stripe for secure payment processing
+- Receive a 5-digit confirmation code upon successful checkout
+- Search for an order using the confirmation code
 
 ## Technologies Used
 
-MERN stack (MongoDb, Express, Reack, NodeJs)
-
-Packages used:
-- Material UI (MUIV5)
-- React- Toastify
+- MERN stack (MongoDB, Express, React, Node.js)
+- Material-UI (MUI v5)
+- React-Toastify
 - DotEnv
-- Momment
-- serve
+- Moment
+- Serve
 
 ## Screenshots
 
 ![Home page](./docs/Home.png)
-_Screenshot of the menu page._
+_Home page screenshot._
 
 ![Cradles](./docs/Cradles.png)
-_Screenshot of the restaurant side._
+_Car seats page screenshot._
 
-![Bookings](./docs/bookings.png)
-_Screenshot of the order page._
+![Bookings](./docs/Bookings.png)
+_Order page screenshot._
 
-![Confirmation page](./docs/confirmed.png)
-_Screenshot of the order page._
+![Confirmation page](./docs/Confirmed.png)
+_Confirmation page screenshot._
+
 
 ## Created by:
 
@@ -47,8 +46,8 @@ _Screenshot of the order page._
 
 Follow these steps to get the project up and running:
 
-git clone https://github.com/Mfried95/grab-your-sushi-now
+git clone git@github.com:Mfried95/cozey-cradle.git
 
 - npm install
-- npm run db:reset
-- npm start
+- cd backend and npm start
+- cd frontend and npm run dev
