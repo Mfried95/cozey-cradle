@@ -48,7 +48,7 @@ const product = myBookings.map((booking, index) => {
           <tr>
             <th>Product Image</th>
             <th>Product Quantity</th>
-            <th>Price per Day</th>
+            <th>Price Per Day</th>
             <th>Number of Days</th>
             <th>Total Price</th>
           </tr>

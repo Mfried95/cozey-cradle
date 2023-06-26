@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className='home-page'>
       <div className="home-container">
-        <h1>Search for a cradle</h1>
+        <h1>Search For a Cradle</h1>
         <SearchBar />
       </div>
       <section className='how-it-works' >
@@ -19,7 +19,7 @@ const Home = () => {
             <p> Explore our extensive collection of car seats, carefully curated to meet various age groups, sizes, and brands. Use our intuitive filtering options to find the perfect match for your child's needs.</p>
           </div>
           <div className='step'>
-            <h2> Choose a cradle </h2>
+            <h2> Choose a Cradle </h2>
             <p> Add your selected car seat to the cart and proceed to our secure checkout. Our user-friendly interface makes it effortless to review your order and finalize the rental.</p>
           </div>
           <div className='step'>

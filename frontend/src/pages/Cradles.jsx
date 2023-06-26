@@ -115,7 +115,7 @@ function Cradles(props) {
 
   return (
     <div className='cradles-contianer'>
-      <h2>Cradles</h2>
+      <h2>Our Cradles</h2>
       <div className="filter-cradles-bar">
         <TextField
           select

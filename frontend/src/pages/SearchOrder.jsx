@@ -104,7 +104,7 @@ const SearchOrder = () => {
       <div className="search-id">
         <input
           type="text"
-          placeholder="Search by booking ID"
+          placeholder="Search by Booking ID"
           value={searchTerm}
           onChange={handleInputChange}
           onClick={clearSearchTerm}
@@ -132,7 +132,7 @@ const SearchOrder = () => {
       <p className="error-message">{error}</p>
       {matchedBooking ? (
   <div className="bookings-container">
-    <h2>Order details for ID: {matchedBooking._id.slice(-4)}</h2>
+    <h2>Order Details For ID: {matchedBooking._id.slice(-4)}</h2>
     <table>
       <thead>
         <tr>
