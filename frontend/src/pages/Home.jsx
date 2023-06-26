@@ -12,7 +12,7 @@ const Home = () => {
         <SearchBar />
       </div>
       <section className='how-it-works' >
-        <h1>How it Works</h1>
+        <h1>How It Works</h1>
         <div className='steps'>
           <div className='step'>
             <h2> Browse and Filter </h2>
