@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className='home-page'>
       <div className="home-container">
-        <h1>Search For a Cradle</h1>
+        <h1>Search For A Cradle</h1>
         <SearchBar />
       </div>
       <section className='how-it-works' >
